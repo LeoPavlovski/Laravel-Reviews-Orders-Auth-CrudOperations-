@@ -1,0 +1,75 @@
+<?php
+
+use App\Http\Controllers\Api\AuthenticationController;
+use App\Http\Controllers\Api\AuthenticationControllerModerator;
+use App\Http\Controllers\Api\AuthenticationControllerUser;
+use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\GenreController;
+use App\Http\Controllers\Api\RolesController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::put('/authUser/admin/{user}',[AuthenticationController::class, 'authenticateUser']);
+    Route::put('/authMod/admin/{user}',[AuthenticationController::class, 'authenticateModerator']);
+    Route::put('/authAdmin/admin/{user}',[AuthenticationController::class, 'authenticateAdmin']);
+
+    Route::put('/authUser/mod/{user}',[AuthenticationControllerModerator::class , 'authenticateUser']);
+    Route::put('/authMod/mod/{user}',[AuthenticationControllerModerator::class , 'authenticateModerator']);
+    Route::put('/authAdmin/mod/{user}',[AuthenticationControllerModerator::class , 'authenticateAdmin']);
+
+    Route::put('/authUser/user/{user}',[AuthenticationControllerUser::class , 'authenticateUser']);
+    Route::put('/authMod/user/{user}',[AuthenticationControllerUser::class , 'authenticateModerator']);
+    Route::put('/authAdmin/user/{user}',[AuthenticationControllerUser::class , 'authenticateAdmin']);
+
+
+    Route::get('/getAuthors' , [AuthorController::class , 'index']);
+    Route::post('/createAuthor' , [AuthorController::class , 'store']);
+    Route::get('/getAuthor/{author}',[AuthorController::class, 'show']);
+    Route::delete('/deleteAuthor/{author}',[AuthorController::class, 'destroy']);
+    Route::put('/editAuthor/{author}',[Authorcontroller::class, 'update']);
+
+    Route::get('/getGenres' , [Genrecontroller::class , 'index']);
+    Route::post('/createGenre' , [Genrecontroller::class , 'store']);
+    Route::get('/getGenre/{genre}',[Genrecontroller::class, 'show']);
+    Route::delete('/deleteGenre/{genre}',[Genrecontroller::class, 'destroy']);
+    Route::put('/editGenre/{genre}',[Genrecontroller::class, 'update']);
+
+    Route::get('/getBooks' , [BookController::class , 'index']);
+    Route::post('/createBook' , [BookController::class , 'store']);
+    Route::get('/getBook/{book}',[BookController::class, 'show']);
+    Route::delete('/deleteBook/{book}',[BookController::class, 'destroy']);
+    Route::put('/editBook/{book}',[BookController::class, 'update']);
+
+    //Admin can delete roles, and update roles
+    Route::post('/createRole', [AuthenticationController::class, 'adminAuthentication']);
+
+    //Moderator can edit roles
+
+
+
+});
+
+Route::post('/auth/login',[AuthenticationController::class, 'loginUser']);
+Route::post('/auth/register',[AuthenticationController::class, 'registerUser']);
+
+//ROLES
+Route::get('/listRoles',[RolesController::class, 'index']);
+Route::get('/listRole/{role}',[RolesController::class, 'show']);
+
