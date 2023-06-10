@@ -7,9 +7,12 @@ use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -23,12 +26,23 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BookRequest $request)
+    public function store(BookRequest $request , Book $book)
     {
+        $validator = Validator::make($request->all(), [
+            'ISBN' => 'required|digits:13',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => 'Validation Error',
+                'message' => 'Wrong ISBN number. Please enter exactly 13 digits.'
+            ], 422);
+        }
+
         $books = Book::create([
            "title"=>$request->title,
             "ISBN"=>$request->ISBN,
-            "publication_year"=>$request->publication_year,
+            "year_of_production"=>$request->year_of_production,
             "year"=>$request->year,
             "price"=>$request->price,
             "author_id"=>$request->author_id,
@@ -53,7 +67,7 @@ class BookController extends Controller
         $book->update([
             "title"=>$request->title,
             "ISBN"=>$request->ISBN,
-            "publication_year"=>$request->publication_year,
+            "year_of_production"=>$request->year_of_production,
             "year"=>$request->year,
             "price"=>$request->price,
             "author_id"=>$request->author_id,

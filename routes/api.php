@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthenticationControllerModerator;
 use App\Http\Controllers\Api\AuthenticationControllerUser;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\BookValidationController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\RolesController;
 use Illuminate\Http\Request;
@@ -52,15 +53,15 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/editGenre/{genre}',[Genrecontroller::class, 'update']);
 
     Route::get('/getBooks' , [BookController::class , 'index']);
-    Route::post('/createBook' , [BookController::class , 'store']);
+    Route::post('/createBook' , [BookController::class ,'store']);
+
     Route::get('/getBook/{book}',[BookController::class, 'show']);
     Route::delete('/deleteBook/{book}',[BookController::class, 'destroy']);
     Route::put('/editBook/{book}',[BookController::class, 'update']);
 
-    //Admin can delete roles, and update roles
-    Route::post('/createRole', [AuthenticationController::class, 'adminAuthentication']);
+   //If the user is a admin , or moderator he can have access to routes.
 
-    //Moderator can edit roles
+    Route::post('/createRole', [AuthenticationController::class, 'adminAuthentication']);
 
 
 

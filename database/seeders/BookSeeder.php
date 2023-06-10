@@ -17,7 +17,7 @@ class BookSeeder extends Seeder
             "title"=>"Harry Potter",
             "year"=>2023,
             'price'=>20.33,
-            'publication_year'=>2001,
+            'year_of_production'=>2001,
             'ISBN'=>998811,
             'author_id'=>1,
             'genre_id'=>1

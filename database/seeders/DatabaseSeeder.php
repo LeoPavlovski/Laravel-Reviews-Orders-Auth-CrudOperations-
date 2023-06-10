@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             BookSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

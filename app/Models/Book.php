@@ -12,7 +12,7 @@ class Book extends Model
     protected $fillable = [
         'title',
         'ISBN',
-        'publication_year',
+        'year_of_production',
         'price',
         'year',
         'author_id',
@@ -25,7 +25,11 @@ class Book extends Model
     public function genre (){
         return $this->belongsTo(Genre::class);
     }
+    protected $rules =[
+        'ISBN' => 'digits:13',
+    ];
 }
+
 
 
 //Foreign keys

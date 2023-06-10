@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ROLES;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,7 @@ class UserSeeder extends Seeder
             "name"=>"Leo",
             "password"=>Hash::make('1234'),
             "email"=>"leo.te2011@hotmail.com",
+            "role_id"=>ROLES::ADMIN->value
         ]);
     }
 }

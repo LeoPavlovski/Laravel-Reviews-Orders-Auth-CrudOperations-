@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->integer('ISBN');
-            $table->year("publication_year");
+            $table->bigInteger('ISBN');
+            $table->year("year_of_production");
             $table->year('year');
             $table->double('price');
             $table->unsignedBigInteger('author_id');
