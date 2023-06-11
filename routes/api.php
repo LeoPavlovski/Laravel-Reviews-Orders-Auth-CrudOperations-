@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BookValidationController;
 use App\Http\Controllers\Api\GenreController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\RolesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,17 +28,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function(){
+//When admin promotes
     Route::put('/authUser/admin/{user}',[AuthenticationController::class, 'authenticateUser']);
     Route::put('/authMod/admin/{user}',[AuthenticationController::class, 'authenticateModerator']);
     Route::put('/authAdmin/admin/{user}',[AuthenticationController::class, 'authenticateAdmin']);
-
+//When Moderator promotes
     Route::put('/authUser/mod/{user}',[AuthenticationControllerModerator::class , 'authenticateUser']);
     Route::put('/authMod/mod/{user}',[AuthenticationControllerModerator::class , 'authenticateModerator']);
     Route::put('/authAdmin/mod/{user}',[AuthenticationControllerModerator::class , 'authenticateAdmin']);
-
+//When user promotes
     Route::put('/authUser/user/{user}',[AuthenticationControllerUser::class , 'authenticateUser']);
     Route::put('/authMod/user/{user}',[AuthenticationControllerUser::class , 'authenticateModerator']);
     Route::put('/authAdmin/user/{user}',[AuthenticationControllerUser::class , 'authenticateAdmin']);
+//Orders
+    Route::get('/getOrders',[OrderController::class, 'index']);
+    Route::get('/getOrder/{order}',[OrderController::class, 'show']);
+    Route::post('/createOrder', [OrderController::class ,'store']);
+
 
 
     Route::get('/getAuthors' , [AuthorController::class , 'index']);
@@ -61,10 +68,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
    //If the user is a admin , or moderator he can have access to routes.
 
-    Route::post('/createRole', [AuthenticationController::class, 'adminAuthentication']);
-
-
-
+    Route::post('/createRole/admin', [AuthenticationController::class, 'adminAuthentication']);
 });
 
 Route::post('/auth/login',[AuthenticationController::class, 'loginUser']);
