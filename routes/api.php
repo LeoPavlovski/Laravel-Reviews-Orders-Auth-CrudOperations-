@@ -5,10 +5,11 @@ use App\Http\Controllers\Api\AuthenticationControllerModerator;
 use App\Http\Controllers\Api\AuthenticationControllerUser;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
-use App\Http\Controllers\Api\BookValidationController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RolesController;
+use App\Http\Controllers\Api\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,10 +42,24 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/authMod/user/{user}',[AuthenticationControllerUser::class , 'authenticateModerator']);
     Route::put('/authAdmin/user/{user}',[AuthenticationControllerUser::class , 'authenticateAdmin']);
 //Orders
-
     Route::get('/getOrders',[OrderController::class, 'index']);
     Route::get('/getOrder/{uuid}', [OrderController::class, 'show']);
     Route::post('/createOrder', [OrderController::class ,'store']);
+
+// Reviews
+    Route::get('/getReviews',[ReviewController::class,'index']);
+    Route::post('/createReview',[ReviewController::class, 'store']);
+    Route::get('/getReview/{review}',[ReviewController::class ,'show']);
+    Route::put('/updateReview/{review}',[ReviewController::class, 'update']);
+    Route::delete('/deleteReview/{review}',[ReviewController::class, 'destroy']);
+
+//Wishlists
+
+    Route::get('/getWishlists',[WishlistController::class,'index']);
+    Route::post('/createWishlist',[WishlistController::class, 'store']);
+    Route::get('/getWishlist/{wishlist}',[WishlistController::class ,'show']);
+    Route::put('/updateWishlist/{wishlist}',[WishlistController::class, 'update']);
+    Route::delete('/deleteWishlist/{wishlist}',[WishlistController::class, 'destroy']);
 
 
 
