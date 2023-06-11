@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             //the uuid must have a primary index.
-            $table->uuid('id')->default(DB::raw('uuid()'))->primary();
-            $table->float('total');
-            $table->unsignedBigInteger('book_id');
-            $table->foreign('book_id')->references('id')->on('books');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->uuid('order_id');
+            $table->integer('quantity');
+            $table->float('subtotal');
+            $table->float('tax');
+            $table->foreignId('book_id')->constrained('books');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

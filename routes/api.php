@@ -41,8 +41,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/authMod/user/{user}',[AuthenticationControllerUser::class , 'authenticateModerator']);
     Route::put('/authAdmin/user/{user}',[AuthenticationControllerUser::class , 'authenticateAdmin']);
 //Orders
+
     Route::get('/getOrders',[OrderController::class, 'index']);
-    Route::get('/getOrder/{order}',[OrderController::class, 'show']);
+    Route::get('/getOrder/{uuid}', [OrderController::class, 'show']);
     Route::post('/createOrder', [OrderController::class ,'store']);
 
 

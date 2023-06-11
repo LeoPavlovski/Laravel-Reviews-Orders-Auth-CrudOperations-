@@ -17,10 +17,16 @@ class OrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-          "order_id" => Str::uuid()->toString(),
-          "user_id"=>$this->user_id,
-          "book_id"=>$this->book_id,
-          "total"=>$this->total,
+          "order_id"=>$this->order_id,
+          "quantity"=>$this->quantity,
+          "subtotal"=>$this->subtotal,
+          "tax"=>$this->tax,
+          "book_id"=>$this->book->id,
+          "user_id"=>$this->user->id,
+          "title"=>$this->book->title,
+          "price"=>$this->book->price,
+          "user_email"=>$this->user->email,
+          "user_name"=>$this->user->name,
         ];
     }
 }

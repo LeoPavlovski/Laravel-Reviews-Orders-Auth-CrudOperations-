@@ -15,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        //Better query than all.
+        $orders =Order::with('book','user')->get();
         return OrderResource::collection($orders);
     }
 
@@ -24,31 +25,28 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-//        $order = new Order();
-//        $order->uuid=Str::uuid();
-//        $order->total_price = $request->total_price;
-//        $order->save();
+     $orderId = Str::uuid();
 
-        $orders = Order::create([
-            "total" => 10.99,
-            "book_id" => 1,
-            "user_id" => 1,
-            "order_id" => Str::uuid()->toString(),
-        ]);
-//        return response()->json([
-//            'message' => 'Order created successfully',
-//            'uuid' => $order->uuid,
-//        ]);
+        $order = new Order(); // Create a new instance of the Order model
 
-        return new OrderResource($orders);
+        $order->order_id = $orderId;
+        $order->tax = $request->input('tax');
+        $order->subtotal = $request->input('subtotal');
+        $order->quantity = $request->input('quantity');
+        $order->user_id = $request->input('user_id');
+        $order->book_id = $request->input('book_id');
+
+        $order->save(); // Save the order to the database
+
+        return new OrderResource($order); // Return the created order as a resource
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(order $order)
+    public function show($uuid)
     {
-        return new OrderResource($order);
+       $order = Order::where('order_id', $uuid)->get();
+       return OrderResource::collection($order);
     }
 
     /**
