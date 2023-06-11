@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 enum STATUS :int
 {
-    case VISIBLE = 1;
+   case VISIBLE = 1;
    case PRIVATE = 2;
 }

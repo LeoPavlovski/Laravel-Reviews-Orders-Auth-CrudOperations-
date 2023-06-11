@@ -10,6 +10,7 @@ use App\Models\Author;
 use App\Models\ROLES;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class AuthorController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthorController extends Controller
     public function index()
     {
         //Get everything from of the books
-        $authors = Author::all();
+      $authors = Author::all();
         return AuthorResource::collection($authors);
     }
 

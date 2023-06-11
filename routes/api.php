@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RolesController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -94,3 +95,6 @@ Route::post('/auth/register',[AuthenticationController::class, 'registerUser']);
 Route::get('/listRoles',[RolesController::class, 'index']);
 Route::get('/listRole/{role}',[RolesController::class, 'show']);
 
+//Search
+
+Route::get('/search',[SearchController::class,'search']);
