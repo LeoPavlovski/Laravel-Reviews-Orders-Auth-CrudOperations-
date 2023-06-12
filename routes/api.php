@@ -5,8 +5,10 @@ use App\Http\Controllers\Api\AuthenticationControllerModerator;
 use App\Http\Controllers\Api\AuthenticationControllerUser;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PromotionController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RolesController;
 use App\Http\Controllers\Api\SearchController;
@@ -98,3 +100,12 @@ Route::get('/listRole/{role}',[RolesController::class, 'show']);
 //Search
 
 Route::get('/search',[SearchController::class,'search']);
+
+//Promotions
+
+Route::get('/getCoupons',[CouponController::class, 'index']);
+Route::post('/createCoupon' , [CouponController::class , 'store']);
+Route::get('/getCoupon/{coupon}',[CouponController::class, 'show']);
+Route::delete('/deleteCoupon/{coupon}',[CouponController::class, 'destroy']);
+Route::put('/editCoupon/{coupon}',[CouponController::class, 'update']);
+
