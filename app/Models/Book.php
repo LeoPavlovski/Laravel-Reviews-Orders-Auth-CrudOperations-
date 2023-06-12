@@ -16,7 +16,11 @@ class Book extends Model
         'price',
         'year',
         'author_id',
-        'genre_id'
+        'genre_id',
+        'language',
+        'pages',
+        'cover_image',
+        'edition'
     ];
     public function author ()
     {

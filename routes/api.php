@@ -8,7 +8,6 @@ use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\OrderController;
-use App\Http\Controllers\Api\PromotionController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RolesController;
 use App\Http\Controllers\Api\SearchController;
@@ -65,30 +64,26 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('/deleteWishlist/{wishlist}',[WishlistController::class, 'destroy']);
 
 
-
+//Authors
     Route::get('/getAuthors' , [AuthorController::class , 'index']);
     Route::post('/createAuthor' , [AuthorController::class , 'store']);
     Route::get('/getAuthor/{author}',[AuthorController::class, 'show']);
     Route::delete('/deleteAuthor/{author}',[AuthorController::class, 'destroy']);
     Route::put('/editAuthor/{author}',[Authorcontroller::class, 'update']);
-
+//Genres
     Route::get('/getGenres' , [Genrecontroller::class , 'index']);
     Route::post('/createGenre' , [Genrecontroller::class , 'store']);
     Route::get('/getGenre/{genre}',[Genrecontroller::class, 'show']);
     Route::delete('/deleteGenre/{genre}',[Genrecontroller::class, 'destroy']);
     Route::put('/editGenre/{genre}',[Genrecontroller::class, 'update']);
-
+//Books
     Route::get('/getBooks' , [BookController::class , 'index']);
     Route::post('/createBook' , [BookController::class ,'store']);
-
     Route::get('/getBook/{book}',[BookController::class, 'show']);
     Route::delete('/deleteBook/{book}',[BookController::class, 'destroy']);
     Route::put('/editBook/{book}',[BookController::class, 'update']);
-
-   //If the user is a admin , or moderator he can have access to routes.
-
-    Route::post('/createRole/admin', [AuthenticationController::class, 'adminAuthentication']);
 });
+//Register / Login
 
 Route::post('/auth/login',[AuthenticationController::class, 'loginUser']);
 Route::post('/auth/register',[AuthenticationController::class, 'registerUser']);

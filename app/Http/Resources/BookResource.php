@@ -22,6 +22,10 @@ class BookResource extends JsonResource
           "ISBN"=>$this->ISBN,
             "author_id"=>$this->author_id,
             "genre_id"=>$this->genre_id,
+            "language"=>$this->language,
+            "edition"=>$this->edition,
+            "pages"=>$this->pages,
+            "cover_image"=>$this->cover_image,
         ];
     }
 }

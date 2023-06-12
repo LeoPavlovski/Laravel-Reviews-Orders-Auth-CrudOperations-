@@ -46,7 +46,11 @@ class BookController extends Controller
             "year"=>$request->year,
             "price"=>$request->price,
             "author_id"=>$request->author_id,
-            "genre_id"=>$request->genre_id
+            "genre_id"=>$request->genre_id,
+            "language"=>$request->language,
+            "pages"=>$request->pages,
+            "cover_image"=>$request->cover_image,
+            "edition"=>$request->edition
         ]);
         return new BookResource($books);
     }
@@ -71,7 +75,12 @@ class BookController extends Controller
             "year"=>$request->year,
             "price"=>$request->price,
             "author_id"=>$request->author_id,
-            "genre_id"=>$request->genre_id
+            "genre_id"=>$request->genre_id,
+            "language"=>$request->language,
+            "pages"=>$request->pages,
+            "cover_image"=>$request->cover_image,
+            "edition"=>$request->edition
+
         ]);
         return new BookResource($book);
     }
