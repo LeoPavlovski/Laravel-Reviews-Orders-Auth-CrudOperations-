@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             StatusSeeder::class,
             WishlistSeeder::class,
+            couponStatusSeeder::class,
+            couponSeeder::class,
         ]);
     }
 }
