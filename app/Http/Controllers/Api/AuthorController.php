@@ -18,9 +18,10 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //Get everything from of the books
+
       $authors = Author::query()->paginate(3);
         return AuthorResource::collection($authors);
     }

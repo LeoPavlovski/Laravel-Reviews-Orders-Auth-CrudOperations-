@@ -20,7 +20,8 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-       $books = Book::query()->paginate(3);
+        $book_pages =$request->book_pages?? 20;
+       $books = Book::query()->paginate($book_pages);
        return BookResource::collection($books);
     }
     public function queries(Request $request)
