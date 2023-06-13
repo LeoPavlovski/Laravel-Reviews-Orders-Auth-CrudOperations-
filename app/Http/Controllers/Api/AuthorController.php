@@ -11,6 +11,7 @@ use App\Models\ROLES;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AuthorController extends Controller
 {
@@ -20,10 +21,16 @@ class AuthorController extends Controller
     public function index()
     {
         //Get everything from of the books
-      $authors = Author::all();
+      $authors = Author::query()->paginate(3);
         return AuthorResource::collection($authors);
     }
-
+        public function authorQuery(){
+        $query=QueryBuilder::for(Author::class)
+            ->allowedFilters('name','biography')->get();
+        return response()->json([
+            $query
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -35,9 +42,7 @@ class AuthorController extends Controller
             "biography"=>$request->biography,
         ]);
         return new AuthorResource($authors);
-
     }
-
     /**
      * Display the specified resource.
      */

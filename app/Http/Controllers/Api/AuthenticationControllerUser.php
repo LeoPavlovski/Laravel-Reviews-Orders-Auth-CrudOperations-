@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 
 class AuthenticationControllerUser extends Controller
 {
-    //Users are not going to have any privileges.
-
+    //Users are not going to have any privileges
     public function authenticateUser(User $user){
         if($user->role_id==2){
             return response()->json([

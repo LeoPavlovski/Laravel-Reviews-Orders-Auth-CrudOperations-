@@ -17,7 +17,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        $reviews = Review::with('book', 'user')->get();
+        $reviews = Review::query()->paginate(3);
         return ReviewResource::collection($reviews);
     }
 

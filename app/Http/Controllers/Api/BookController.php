@@ -8,6 +8,8 @@ use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BookController extends Controller
 {
@@ -16,11 +18,17 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //Display the books
-        $books= Book::all();
-        return BookResource::collection($books);
+       $books = Book::query()->paginate(3);
+       return BookResource::collection($books);
+    }
+    public function queries(Request $request)
+    {
+            $books = QueryBuilder::for(Book::class)
+                ->allowedFilters(['title', 'ISBN'])
+                ->get();
+            return response()->json($books);
     }
 
     /**

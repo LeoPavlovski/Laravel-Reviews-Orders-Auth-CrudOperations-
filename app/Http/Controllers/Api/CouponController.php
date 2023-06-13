@@ -14,7 +14,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::all();
+        $coupons = Coupon::query()->paginate(3);
         return CouponResource::collection($coupons);
     }
 

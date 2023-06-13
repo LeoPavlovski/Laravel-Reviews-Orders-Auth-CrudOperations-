@@ -16,7 +16,7 @@ class RecommendationController extends Controller
      */
     public function index()
     {
-        $recommendations  = Recommendation::all();
+        $recommendations  = Recommendation::query()->paginate(3);
         return RecommendationResource::collection($recommendations);
     }
 

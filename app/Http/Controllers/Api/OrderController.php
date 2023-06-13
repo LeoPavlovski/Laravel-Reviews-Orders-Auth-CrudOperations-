@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         //Better query than all.
-        $orders =Order::with('book','user')->get();
+        $orders =Order::query()->paginate(3);
         return OrderResource::collection($orders);
     }
 

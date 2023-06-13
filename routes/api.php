@@ -101,3 +101,6 @@ Route::get('/getRecommendation/{recommendation}',[RecommendationController::clas
 Route::delete('/deleteRecommendation/{recommendation}',[RecommendationController::class, 'destroy']);
 Route::put('/editRecommendation/{recommendation}',[RecommendationController::class, 'update']);
 
+
+Route::get('/getBooksQuery', [BookController::class ,'queries']);
+Route::get('/getAuthorsQuery',[AuthorController::class ,'authorQuery']);

@@ -13,7 +13,7 @@ class GenreController extends Controller
     public function index()
     {
         //Display the books
-        $books= Genre::all();
+        $books= Genre::query()->paginate(3);
         return GenreResource::collection($books);
     }
 
