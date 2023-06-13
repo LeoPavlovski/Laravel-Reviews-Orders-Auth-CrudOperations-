@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\RecommendationController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RolesController;
 use App\Http\Controllers\Api\SearchController;
@@ -47,23 +48,18 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/getOrders',[OrderController::class, 'index']);
     Route::get('/getOrder/{uuid}', [OrderController::class, 'show']);
     Route::post('/createOrder', [OrderController::class ,'store']);
-
 // Reviews
     Route::get('/getReviews',[ReviewController::class,'index']);
     Route::post('/createReview',[ReviewController::class, 'store']);
     Route::get('/getReview/{review}',[ReviewController::class ,'show']);
     Route::put('/updateReview/{review}',[ReviewController::class, 'update']);
     Route::delete('/deleteReview/{review}',[ReviewController::class, 'destroy']);
-
 //Wishlists
-
     Route::get('/getWishlists',[WishlistController::class,'index']);
     Route::post('/createWishlist',[WishlistController::class, 'store']);
     Route::get('/getWishlist/{wishlist}',[WishlistController::class ,'show']);
     Route::put('/updateWishlist/{wishlist}',[WishlistController::class, 'update']);
     Route::delete('/deleteWishlist/{wishlist}',[WishlistController::class, 'destroy']);
-
-
 //Authors
     Route::get('/getAuthors' , [AuthorController::class , 'index']);
     Route::post('/createAuthor' , [AuthorController::class , 'store']);
@@ -84,23 +80,24 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/editBook/{book}',[BookController::class, 'update']);
 });
 //Register / Login
-
 Route::post('/auth/login',[AuthenticationController::class, 'loginUser']);
 Route::post('/auth/register',[AuthenticationController::class, 'registerUser']);
-
 //ROLES
 Route::get('/listRoles',[RolesController::class, 'index']);
 Route::get('/listRole/{role}',[RolesController::class, 'show']);
-
 //Search
-
 Route::get('/search',[SearchController::class,'search']);
-
 //Promotions
-
 Route::get('/getCoupons',[CouponController::class, 'index']);
 Route::post('/createCoupon' , [CouponController::class , 'store']);
 Route::get('/getCoupon/{coupon}',[CouponController::class, 'show']);
 Route::delete('/deleteCoupon/{coupon}',[CouponController::class, 'destroy']);
 Route::put('/editCoupon/{coupon}',[CouponController::class, 'update']);
+
+//Recommendations No Authentication
+Route::get('/getRecommendations',[RecommendationController::class, 'index']);
+Route::post('/createRecommendation',[RecommendationController::class, 'store']);
+Route::get('/getRecommendation/{recommendation}',[RecommendationController::class , 'show']);
+Route::delete('/deleteRecommendation/{recommendation}',[RecommendationController::class, 'destroy']);
+Route::put('/editRecommendation/{recommendation}',[RecommendationController::class, 'update']);
 

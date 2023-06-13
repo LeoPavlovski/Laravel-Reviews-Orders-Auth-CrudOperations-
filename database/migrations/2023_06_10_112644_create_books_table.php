@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('author_id')->references('id')->on('authors');
             $table->unsignedBigInteger('genre_id');
             $table->foreign('genre_id')->references('id')->on('genres');
+
             $table->timestamps();
         });
     }

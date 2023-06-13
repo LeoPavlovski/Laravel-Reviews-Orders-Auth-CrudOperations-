@@ -20,20 +20,33 @@ class Book extends Model
         'language',
         'pages',
         'cover_image',
-        'edition'
+        'edition',
+        'status'
+
     ];
     public function author ()
     {
         return $this->belongsTo(Author::class);
     }
-    public function genre (){
+    public function genre(){
         return $this->belongsTo(Genre::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function coupon()
+    {
+        return $this->hasMany(Coupon::class);
+    }
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
+    }
+    public function order(){
+        return $this->hasMany(Order::class);
     }
     protected $rules =[
         'ISBN' => 'digits:13',
     ];
 }
-
-
-
 //Foreign keys

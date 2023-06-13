@@ -25,7 +25,7 @@ class BookSeeder extends Seeder
                 'language'=>'english',
                 'edition'=>'first',
                 'pages'=>100,
-                'cover_image'=>"test1"
+                'cover_image'=>"test1",
             ],
             [
                 "title" => "The Wizard's Quest",

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             WishlistSeeder::class,
             couponStatusSeeder::class,
             couponSeeder::class,
+            bookRecommentationSeeder::class,
         ]);
     }
 }
