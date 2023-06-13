@@ -103,4 +103,5 @@ Route::put('/editRecommendation/{recommendation}',[RecommendationController::cla
 
 
 Route::get('/getBooksQuery', [BookController::class ,'queries']);
+Route::get('/getGenreQuery',[GenreController::class, 'queries']);
 Route::get('/getAuthorsQuery',[AuthorController::class ,'authorQuery']);

@@ -7,6 +7,7 @@ use App\Http\Requests\GenreRequest;
 use App\Http\Resources\GenreResource;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class GenreController extends Controller
 {
@@ -15,6 +16,15 @@ class GenreController extends Controller
         //Display the books
         $books= Genre::query()->paginate(3);
         return GenreResource::collection($books);
+    }
+    public function queries()
+    {
+        $Genre =QueryBuilder::for(Genre::class)
+            ->allowedFilters('name')->get();
+        return response()->json([
+           //getting back the genre
+            $Genre
+        ]);
     }
 
     /**
