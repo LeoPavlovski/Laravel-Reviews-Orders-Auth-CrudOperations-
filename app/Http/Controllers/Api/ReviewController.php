@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReviewResource;
 use App\Models\Review;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ReviewController extends Controller
 {
@@ -20,11 +22,17 @@ class ReviewController extends Controller
         $reviews = Review::query()->paginate(3);
         return ReviewResource::collection($reviews);
     }
+    public function queries(){
+        $query = Review::query();
+        $reviews = QueryBuilder::for($query)->allowedIncludes('user','book')->get();
+        return ReviewResource::collection($reviews);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
 //    Validate that the grade of the review must be1/5.
+
 
     public function store(Request $request)
     {

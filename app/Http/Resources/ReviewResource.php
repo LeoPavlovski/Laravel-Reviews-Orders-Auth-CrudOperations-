@@ -15,22 +15,12 @@ class ReviewResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-          "review_id"=>$this->id,
-          "user_id"=>$this->user->id,
-          "book_id"=>$this->book->id,
-          "price"=>$this->book->price,
-          "title"=>$this->book->title,
+            "review_id"=>$this->id,
             "subject"=>$this->subject,
             "description"=>$this->description,
             "grade"=>$this->grade,
-          "year_of_production"=>$this->book->year_of_production,
-            "ISBN"=>$this->book->ISBN,
-            "year"=>$this->book->year,
-            "author_id"=>$this->book->author_id,
-            "genre_id"=>$this->book->genre_id,
-            "user_email"=>$this->user->email,
-            "user_name"=>$this->user->name,
-
+            'user' => new UserResource($this->whenLoaded('user')),
+            'book'=>new BookResource($this->whenLoaded('book')),
         ];
     }
 }
