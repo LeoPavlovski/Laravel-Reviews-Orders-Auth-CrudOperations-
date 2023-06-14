@@ -21,6 +21,7 @@ class CouponResource extends JsonResource
           "valid_from"=>$this->valid_from,
           "valid_until"=>$this->valid_until,
           "is_active"=>$this->is_active,
+            //We need to take the relationship
           'books' => new BookResource($this->whenLoaded('book')),
         ];
     }

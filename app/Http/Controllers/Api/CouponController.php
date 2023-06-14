@@ -24,7 +24,7 @@ class CouponController extends Controller
     public function queries(){
         $query = Coupon::query();
         $coupon = QueryBuilder::for($query)
-            ->allowedIncludes('book')
+            ->allowedIncludes('book','book.author','book.orders','book.reviews','book.wishlists')
             ->get();
        return CouponResource::collection($coupon);
     }
