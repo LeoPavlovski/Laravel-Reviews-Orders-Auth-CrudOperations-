@@ -25,12 +25,14 @@ class AuthorController extends Controller
       $authors = Author::query()->paginate(3);
         return AuthorResource::collection($authors);
     }
-        public function authorQuery(){
-        $query=QueryBuilder::for(Author::class)
-            ->allowedFilters('name','biography')->get();
-        return response()->json([
-            $query
-        ]);
+    public function queries()
+    {
+        //orders need to be updated
+        $query = Author::query();
+        $authors = QueryBuilder::for($query)
+            ->allowedIncludes('book', 'book.genre','book.coupons','book.wishlists','book.reviews','book.orders' )
+            ->get();
+        return AuthorResource::collection($authors);
     }
     /**
      * Store a newly created resource in storage.

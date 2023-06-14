@@ -15,38 +15,47 @@ class AuthorSeeder extends Seeder
     {
         DB::table('authors')->insert([
            [ "name" => "JK Rowling",
-            "biography" => "J.K. Rowling's Biography"],
+            "biography" => "J.K. Rowling's Biography",
+           ],
             [
                 "name" => "Stephen King",
-                "biography" => "Stephen King's Biography"
+                "biography" => "Stephen King's Biography",
+
             ],
             [
                 "name" => "Agatha Christie",
-                "biography" => "Agatha Christie's Biography"
+                "biography" => "Agatha Christie's Biography",
+
             ],
             [
                 "name" => "Harper Lee",
-                "biography" => "Harper Lee's Biography"
+                "biography" => "Harper Lee's Biography",
+
             ],
             [
                 "name" => "George Orwell",
-                "biography" => "George Orwell's Biography"
+                "biography" => "George Orwell's Biography",
+
             ],
             [
                 "name" => "Jane Austen",
-                "biography" => "Jane Austen's Biography"
+                "biography" => "Jane Austen's Biography",
+
             ],
             [
                 "name" => "Ernest Hemingway",
-                "biography" => "Ernest Hemingway's Biography"
+                "biography" => "Ernest Hemingway's Biography",
+
             ],
             [
                 "name" => "F. Scott Fitzgerald",
-                "biography" => "F. Scott Fitzgerald's Biography"
+                "biography" => "F. Scott Fitzgerald's Biography",
+
             ],
             [
                 "name" => "Toni Morrison",
-                "biography" => "Toni Morrison's Biography"
+                "biography" => "Toni Morrison's Biography",
+
             ],
 
         ]);
