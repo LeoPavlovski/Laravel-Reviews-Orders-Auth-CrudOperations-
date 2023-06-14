@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WishtlistResource;
 use App\Models\wishlist;
+
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class WishlistController extends Controller
 {
@@ -18,6 +20,12 @@ class WishlistController extends Controller
         $wishlists =WishList::with('user','book')->get();
         return WishtlistResource::collection($wishlists);
 
+    }
+    public function queries(){
+        $query = WishList::query();
+        $wishlists = QueryBuilder::for($query)
+            ->allowedIncludes('user', 'book')->get();
+       return WishtlistResource::collection($wishlists);
     }
 
     /**
