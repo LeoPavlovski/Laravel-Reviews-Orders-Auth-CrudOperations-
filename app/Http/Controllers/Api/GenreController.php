@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GenreRequest;
+use App\Http\Resources\AuthorResource;
 use App\Http\Resources\GenreResource;
+use App\Models\Author;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -17,16 +19,11 @@ class GenreController extends Controller
         $books= Genre::query()->paginate(3);
         return GenreResource::collection($books);
     }
-    public function queries()
-    {
-        $Genre =QueryBuilder::for(Genre::class)
-            ->allowedFilters('name')->get();
-        return response()->json([
-           //getting back the genre
-            $Genre
-        ]);
-    }
-
+    public function queries(){
+       $query = Genre::query();
+       $genres = QueryBuilder::for($query)->get();
+       return GenreResource::collection($genres);
+   }
     /**
      * Store a newly created resource in storage.
      */
