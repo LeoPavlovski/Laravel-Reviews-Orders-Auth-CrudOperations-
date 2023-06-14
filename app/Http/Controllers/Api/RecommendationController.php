@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecommendationResource;
 use App\Models\Recommendation;
+use Doctrine\DBAL\Query;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\QueryBuilder;
 
 
 class RecommendationController extends Controller
@@ -18,6 +20,11 @@ class RecommendationController extends Controller
     {
         $recommendations  = Recommendation::query()->paginate(3);
         return RecommendationResource::collection($recommendations);
+    }
+    public function queries(){
+        $query = Recommendation::query();
+        $recommend = QueryBuilder::for($query)->allowedIncludes('book','user','book.orders')->get();
+        return RecommendationResource::collection($recommend);
     }
 
     /**
@@ -74,7 +81,6 @@ class RecommendationController extends Controller
             return response()->json([
                 'errors'=>$validator->errors()
             ]);
-
         }
         if($validator->passes()){
             $recommendation->update([
