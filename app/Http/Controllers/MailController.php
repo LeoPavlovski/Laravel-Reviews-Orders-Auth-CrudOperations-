@@ -16,7 +16,7 @@ class MailController extends Controller
         $user_name="Leo";
         $user_surname="Pavlovski";
         $book = Book::where('title','Harry Potter')->first();
-        $author= Author::where('name',"JK Rolwings")->first();
+        $author= Author::where('name',"JK Rowling")->first();
 
         Mail::to("leo.te2011@hotmail.com")->send(new SignUp($user_name, $user_surname, $book, $author));
     }
