@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use App\Http\Resources\CouponResource;
+use App\Models\Book;
 use App\Models\Coupon;
+
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CouponController extends Controller
 {
@@ -16,6 +20,13 @@ class CouponController extends Controller
     {
         $coupons = Coupon::query()->paginate(3);
         return CouponResource::collection($coupons);
+    }
+    public function queries(){
+        $query = Coupon::query();
+        $coupon = QueryBuilder::for($query)
+            ->allowedIncludes('book')
+            ->get();
+       return CouponResource::collection($coupon);
     }
 
     /**

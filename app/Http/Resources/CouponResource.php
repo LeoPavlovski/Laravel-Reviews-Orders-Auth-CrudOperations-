@@ -20,8 +20,8 @@ class CouponResource extends JsonResource
           "description"=>$this->description,
           "valid_from"=>$this->valid_from,
           "valid_until"=>$this->valid_until,
-//          "book_id"=>$this->book->id,
           "is_active"=>$this->is_active,
+          'books' => new BookResource($this->whenLoaded('book')),
         ];
     }
 }
