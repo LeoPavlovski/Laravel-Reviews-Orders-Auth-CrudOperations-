@@ -21,12 +21,9 @@ class OrderResource extends JsonResource
           "quantity"=>$this->quantity,
           "subtotal"=>$this->subtotal,
           "tax"=>$this->tax,
-          "book_id"=>$this->book->id,
           "user_id"=>$this->user->id,
-          "title"=>$this->book->title,
-          "price"=>$this->book->price,
-          "user_email"=>$this->user->email,
-          "user_name"=>$this->user->name,
+          'books' => new BookResource($this->whenLoaded('book')),
+          'users'=>new UserResource($this->whenloaded('user'))
         ];
     }
 }

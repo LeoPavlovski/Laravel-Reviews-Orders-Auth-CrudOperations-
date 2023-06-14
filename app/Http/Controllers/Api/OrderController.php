@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
+use App\Models\Book;
 use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class OrderController extends Controller
 {
@@ -19,7 +21,13 @@ class OrderController extends Controller
         $orders =Order::query()->paginate(3);
         return OrderResource::collection($orders);
     }
-
+    public function queries(){
+        $query = Order::query();
+        $books = QueryBuilder::for($query)
+            ->allowedIncludes('book', 'user', 'book.author', 'book.reviews', 'book.wishlists', 'book.coupons', 'book.genre')
+            ->get();
+       return OrderResource::collection($books);
+    }
     /**
      * Store a newly created resource in storage.
      */
