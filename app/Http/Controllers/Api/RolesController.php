@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RolesResource;
 use App\Models\Role;
+use Doctrine\DBAL\Query;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class RolesController extends Controller
 {
@@ -17,7 +19,11 @@ class RolesController extends Controller
         $roles = Role::all();
         return RolesResource::collection($roles);
     }
-
+    public function queries(){
+        $query = Role::query();
+        $roles = QueryBuilder::for($query)->allowedIncludes('user')->get();
+        return RolesResource::collection($roles);
+    }
     /**
      * Store a newly created resource in storage.
      */
