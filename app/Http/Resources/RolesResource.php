@@ -17,7 +17,8 @@ class RolesResource extends JsonResource
         return [
             "role"=>$this->role,
             "id"=>$this->id,
-            "user_id"=>$this->user_id,
+//            Connect the user
+            "user"=>new UserResource($this->whenLoaded('user'))
         ];
     }
 }
