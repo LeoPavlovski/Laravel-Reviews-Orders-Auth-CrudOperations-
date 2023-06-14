@@ -13,25 +13,27 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class BookController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index2(Request $request)
     {
-        $book_pages =$request->book_pages?? 20;
-       $books = Book::query()->paginate($book_pages);
-       return BookResource::collection($books);
-    }
-    public function queries(Request $request)
-    {
-            $books = QueryBuilder::for(Book::class)
-                ->allowedFilters(['title', 'ISBN'])
-                ->get();
-            return response()->json($books);
+        $book_pages =$request->book_pages ?? 20;
+        $books = Book::query()->paginate($book_pages);
+        return BookResource::collection($books);
     }
 
+    public function index()
+    {
+        $books = Book::all();
+        return BookResource::collection($books);
+    }
+   public function queries(){
+        $query = Book::query();
+        //Orders need to be fixed
+        $books = QueryBuilder::for($query)->allowedIncludes('reviews.user','author','coupons','wishlists','orders','genre')->get();
+        return BookResource::collection($books);
+   }
     /**
      * Store a newly created resource in storage.
      */

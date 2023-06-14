@@ -74,6 +74,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/editGenre/{genre}',[Genrecontroller::class, 'update']);
 //Books
     Route::get('/getBooks' , [BookController::class , 'index']);
+    Route::get('/getBooks2' , [BookController::class , 'index2']);
+
     Route::post('/createBook' , [BookController::class ,'store']);
     Route::get('/getBook/{book}',[BookController::class, 'show']);
     Route::delete('/deleteBook/{book}',[BookController::class, 'destroy']);
@@ -103,5 +105,16 @@ Route::put('/editRecommendation/{recommendation}',[RecommendationController::cla
 
 
 Route::get('/getBooksQuery', [BookController::class ,'queries']);
-Route::get('/getGenreQuery',[GenreController::class, 'queries']);
-Route::get('/getAuthorsQuery',[AuthorController::class ,'authorQuery']);
+Route::get('/getOrdersQuery',[OrderController::class,'queries']);
+Route::get('/getGenresQuery',[GenreController::class, 'queries']);
+Route::get('/getRolesQuery',[RolesController::class, 'queries']);
+Route::get('/getWishListsQuery',[WishlistController::class,'queries']);
+Route::get('/getAuthorsQuery', [AuthorController::class, 'queries']);
+Route::get('/getCouponsQuery',[CouponController::class,'queries']);
+Route::get('/getRecommendationsQuery', [RecommendationController::class,'queries']);
+Route::get('/getReviewQuery',[ReviewController::class , 'queries']);
+
+
+
+
+

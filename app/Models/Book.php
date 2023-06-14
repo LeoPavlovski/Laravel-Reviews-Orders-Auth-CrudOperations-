@@ -35,14 +35,14 @@ class Book extends Model
     {
         return $this->hasMany(Review::class);
     }
-    public function coupon()
+    public function coupons()
     {
         return $this->hasMany(Coupon::class);
     }
-    public function wishlist(){
+    public function wishlists(){
         return $this->hasMany(Wishlist::class);
     }
-    public function order(){
+    public function orders(){
         return $this->hasMany(Order::class);
     }
     protected $rules =[
