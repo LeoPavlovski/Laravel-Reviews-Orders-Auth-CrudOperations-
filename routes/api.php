@@ -117,7 +117,6 @@ Route::get('/getCouponsQuery',[CouponController::class,'queries']);
 Route::get('/getRecommendationsQuery', [RecommendationController::class,'queries']);
 Route::get('/getReviewQuery',[ReviewController::class , 'queries']);
 
-Route::get('/testcommit',[Reviewcontroller::class, 'queries']);
 
 
 
