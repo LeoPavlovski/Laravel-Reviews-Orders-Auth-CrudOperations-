@@ -26,6 +26,7 @@ class ReviewController extends Controller
         $query = Review::query();
         $reviews = QueryBuilder::for($query)->allowedIncludes('user','book')
             ->allowedFilters(['grade','description','subject'])
+            ->allowedSorts('grade','description','subject')
             ->get();
         return ReviewResource::collection($reviews);
     }

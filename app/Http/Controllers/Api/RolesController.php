@@ -23,6 +23,7 @@ class RolesController extends Controller
         $query = Role::query();
         $roles = QueryBuilder::for($query)->allowedIncludes('user')
             ->allowedFilters('role')
+            ->allowedSorts('role')
             ->get();
         return RolesResource::collection($roles);
     }

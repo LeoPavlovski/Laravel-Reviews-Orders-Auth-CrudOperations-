@@ -25,7 +25,10 @@ class WishlistController extends Controller
     public function queries(){
         $query = WishList::query();
         $wishlists = QueryBuilder::for($query)->allowedFilters(['user_id','book_id','status'])
-            ->allowedIncludes('user', 'book')->get();
+
+            ->allowedIncludes('user', 'book')
+            ->allowedSorts('user_id', 'book_id','status')
+            ->get();
        return WishtlistResource::collection($wishlists);
     }
 
@@ -64,7 +67,6 @@ class WishlistController extends Controller
         ]);
         return new WishtlistResource($wishlist);
     }
-
     /**
      * Remove the specified resource from storage.
      */

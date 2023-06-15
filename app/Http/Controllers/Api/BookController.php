@@ -31,7 +31,7 @@ class BookController extends Controller
    public function queries(){
         $query = Book::query();
         //Orders need to be fixed
-        $books = QueryBuilder::for($query)->allowedIncludes('reviews.user','author','coupons','wishlists','orders','genre')->allowedFilters('title','ISBN','year_of_production','price','year','language','pages')
+        $books = QueryBuilder::for($query)->allowedIncludes('reviews.user','author','coupons','wishlists','orders','genre')->allowedFilters('title','ISBN','year_of_production','price','year','language','pages')->allowedSorts('title','year_of_production','ISBN','year','price','language','pages')
             ->get();
         return BookResource::collection($books);
    }
