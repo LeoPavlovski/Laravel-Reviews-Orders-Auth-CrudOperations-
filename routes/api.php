@@ -81,6 +81,9 @@ Route::middleware(['auth:sanctum','api.throttle:10,1'])->group(function(){
     Route::delete('/deleteBook/{book}',[BookController::class, 'destroy']);
     Route::put('/editBook/{book}',[BookController::class, 'update']);
 });
+
+//OUTSIDE MIDDLEWARE
+
 //Register / Login
 Route::post('/auth/login',[AuthenticationController::class, 'loginUser']);
 Route::post('/auth/register',[AuthenticationController::class, 'registerUser']);

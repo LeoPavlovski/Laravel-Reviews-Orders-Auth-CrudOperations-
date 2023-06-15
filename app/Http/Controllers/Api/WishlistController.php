@@ -17,13 +17,14 @@ class WishlistController extends Controller
     public function index()
     {
         //Get all of the wishlists
-        $wishlists =WishList::with('user','book')->get();
+        $wishlists =WishList::with('user','book')
+            ->get();
         return WishtlistResource::collection($wishlists);
 
     }
     public function queries(){
         $query = WishList::query();
-        $wishlists = QueryBuilder::for($query)
+        $wishlists = QueryBuilder::for($query)->allowedFilters(['user_id','book_id','status'])
             ->allowedIncludes('user', 'book')->get();
        return WishtlistResource::collection($wishlists);
     }

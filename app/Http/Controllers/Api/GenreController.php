@@ -21,7 +21,8 @@ class GenreController extends Controller
     }
     public function queries(){
        $query = Genre::query();
-       $genres = QueryBuilder::for($query)->get();
+       $genres = QueryBuilder::for($query)->allowedFilters(['name'])
+           ->get();
        return GenreResource::collection($genres);
    }
     /**

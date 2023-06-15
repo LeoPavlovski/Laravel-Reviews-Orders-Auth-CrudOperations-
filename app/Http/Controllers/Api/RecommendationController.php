@@ -23,7 +23,9 @@ class RecommendationController extends Controller
     }
     public function queries(){
         $query = Recommendation::query();
-        $recommend = QueryBuilder::for($query)->allowedIncludes('book','user','book.orders')->get();
+        $recommend = QueryBuilder::for($query)->allowedIncludes('book','user','book.orders')
+            ->allowedFilters(['recommendation_text'])
+            ->get();
         return RecommendationResource::collection($recommend);
     }
 

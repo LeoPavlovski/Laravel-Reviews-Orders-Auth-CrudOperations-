@@ -25,6 +25,7 @@ class OrderController extends Controller
         $query = Order::query();
         $books = QueryBuilder::for($query)
             ->allowedIncludes('book', 'user', 'book.author', 'book.reviews', 'book.wishlists', 'book.coupons', 'book.genre')
+           ->allowedFilters(['quantity','subtotal','tax'])
             ->get();
        return OrderResource::collection($books);
     }

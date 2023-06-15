@@ -31,6 +31,7 @@ class AuthorController extends Controller
         $query = Author::query();
         $authors = QueryBuilder::for($query)
             ->allowedIncludes('book', 'book.genre','book.coupons','book.wishlists','book.reviews','book.orders' )
+            ->allowedFilters('name')
             ->get();
         return AuthorResource::collection($authors);
     }
