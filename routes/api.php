@@ -108,6 +108,8 @@ Route::put('/editRecommendation/{recommendation}',[RecommendationController::cla
 
 
 Route::get('/getBooksQuery', [BookController::class ,'queries']);
+
+Route::get('/getBooksQuery1',[BookController::class , 'query1']);
 Route::get('/getOrdersQuery',[OrderController::class,'queries']);
 Route::get('/getGenresQuery',[GenreController::class, 'queries']);
 Route::get('/getRolesQuery',[RolesController::class, 'queries']);
