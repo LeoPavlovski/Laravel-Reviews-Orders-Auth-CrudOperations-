@@ -24,13 +24,13 @@ class PremierSeeder extends Seeder
             [
                 "first_week"=>'Week1',
                 'city'=>'Tetovo',
-                'format'=>'someformat',
+                'formats'=>'someformat',
                 'premier_id'=>1
             ],
             [
                 "first_week"=>'Week1',
                 'city'=>'Tetovo',
-                'format'=>'someformat',
+                'formats'=>'someformat',
                 'premier_id'=>1
             ],
         ]);

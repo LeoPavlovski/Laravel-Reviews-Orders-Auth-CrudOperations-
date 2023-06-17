@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActorMovieResource;
 use App\Models\Actor_Movie;
+use App\Models\ActorMovie;
 use Illuminate\Http\Request;
 
 class ActorMovieController extends Controller
@@ -20,7 +21,7 @@ class ActorMovieController extends Controller
      */
     public function index()
     {
-        $actor_movie = Actor_Movie::all();
+        $actor_movie = ActorMovie::all();
         return ActorMovieResource::collection($actor_movie);
     }
 
@@ -29,7 +30,7 @@ class ActorMovieController extends Controller
      */
     public function store(Request $request)
     {
-        $actor_movie = Actor_Movie::create([
+        $actor_movie = ActorMovie::create([
            'actor_id'=>$request->actor_id,
            'movie_id'=>$request->movie_id
         ]);
@@ -39,7 +40,7 @@ class ActorMovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Actor_Movie $actorMovie)
+    public function show(ActorMovie $actorMovie)
     {
         return new ActorMovieResource($actorMovie);
     }
@@ -47,7 +48,7 @@ class ActorMovieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Actor_Movie $actorMovie)
+    public function update(Request $request, ActorMovie $actorMovie)
     {
         $actorMovie->update([
            'actor_id'=>$request->actor_id,
@@ -59,7 +60,7 @@ class ActorMovieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Actor_Movie $actorMovie)
+    public function destroy(ActorMovie $actorMovie)
     {
         $actorMovie->delete();
         return response()->json([

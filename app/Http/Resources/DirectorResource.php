@@ -12,8 +12,19 @@ class DirectorResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+    ////      $table->id();
+    ////            $table->string('name');
+    ////            $table->string('surname');
+    ////            $table->string('expertise');
+    ////            $table->string('genre');
+    ///
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+       return [
+         'name'=>$this->name,
+         'surname'=>$this->surname,
+         'expertise'=>$this->expertise,
+         'genre'=>$this->genre,
+       ];
     }
 }

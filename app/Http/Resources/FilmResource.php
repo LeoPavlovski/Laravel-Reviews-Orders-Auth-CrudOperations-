@@ -12,8 +12,21 @@ class FilmResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+    //$table->id();
+//            $table->string('premier_week');
+//            $table->string('city');
+//            $table->string('format');
+//            $table->unsignedBigInteger('oscar_id');
+//            $table->foreign('oscar_id')->references('id')->on('oscars');
+//            $table->timestamps();
+
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+           'premier_week'=>$this->premier_week,
+            'city'=>$this->city,
+            'format'=>$this->format,
+            'oscar_id'=>$this->oscar_id,
+        ];
     }
 }

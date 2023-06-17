@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 //            $table->unsignedBigInteger('actor_id');
 //            $table->foreign('actor_id')->references('id')->on('actors');
 //            $table->timestamps();
-class TV extends Model
+class Tv extends Model
 {
     use HasFactory;
     protected $fillable =[
-      'tv_channel',
-      'episodes',
-      'actor_id',
+        'tv_channel',
+        'episodes',
+        'actor_id',
     ];
     public function actor(){
         return $this->belongsTo(Actor::class);

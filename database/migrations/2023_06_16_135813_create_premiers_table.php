@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_week');
             $table->string('city');
-            $table->string('format');
+            $table->string('formats');
             $table->unsignedBigInteger('premier_id');
             $table->foreign('premier_id')->references('id')->on('premier_types');
             $table->timestamps();

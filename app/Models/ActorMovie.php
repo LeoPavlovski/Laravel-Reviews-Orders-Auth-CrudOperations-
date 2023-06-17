@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 //            $table->unsignedBigInteger('movie_id');
 //            $table->foreign('movie_id')->references('id')->on('movies');
 //        });
-class Actor_Movie extends Model
+class ActorMovie extends Model
 {
     use HasFactory;
     protected $fillable =[

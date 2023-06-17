@@ -20,7 +20,7 @@ class TVSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('tv_series')->insert([
+        DB::table('tvs')->insert([
             [
                 "tv_channel"=>'telma',
                 'episodes'=>'something',

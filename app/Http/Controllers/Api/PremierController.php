@@ -31,6 +31,7 @@ class PremierController extends Controller
     public function store(Request $request)
     {
         $premiers= Premier::create([
+            'formats'=>$request->formats,
            'first_week'=>$request->first_week,
            'city'=>$request->city,
            'premier_id'=>$request->premier_id,
@@ -52,9 +53,10 @@ class PremierController extends Controller
     public function update(Request $request, Premier $premier)
     {
         $premier->update([
+            'formats'=>$request->formats,
            'first_week'=>$request->first_week,
            'city'=>$request->city,
-           'premier_id'=>$request->premer_id,
+           'premier_id'=>$request->premier_id,
         ]);
         return new PremierResource($premier);
     }

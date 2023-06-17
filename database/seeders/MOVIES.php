@@ -14,7 +14,7 @@ class MOVIES extends Seeder
      */
     public function run(): void
     {
-        DB::table('movies_types')->insert([
+        DB::table('movie_types')->insert([
             [
                'types'=>MOVIES_TYPES::FILM->name,
                 'id'=>MOVIES_TYPES::FILM->value,

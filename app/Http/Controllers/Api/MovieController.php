@@ -32,6 +32,7 @@ class MovieController extends Controller
     {
         $movies = Movie::create([
             'name'=>$request->name,
+
                 'director_id'=>$request->director_id,
                 'salary'=>$request->salary
             ]

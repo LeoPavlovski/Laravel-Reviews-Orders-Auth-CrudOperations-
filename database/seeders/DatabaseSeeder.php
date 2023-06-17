@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             Actor_Movie_Seeder::class,
             TVSeeder::class,
             FilmSeeder::class,
+            Actor_Movie_Seeder::class,
         ]);
     }
 }

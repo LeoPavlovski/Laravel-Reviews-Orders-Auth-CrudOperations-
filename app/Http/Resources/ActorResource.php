@@ -4,7 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+//// $table->id();
+////            $table->string('name');
+////            $table->string('nickname');
+////            $table->date('date_of_birth');
+////            $table->unsignedBigInteger('agent_id');
+////            $table->foreign('agent_id')->references('id')->on('agents');
+////            $table->timestamps();
 class ActorResource extends JsonResource
 {
     /**
@@ -14,6 +20,13 @@ class ActorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+       return [
+           'name'=>$this->name,
+           'nickname'=>$this->nickname,
+           'date'=>$this->date,
+           'agent_id'=>$this->agent_id,
+           'agent_code'=>$this->agent->code,
+           'agent_name'=>$this->agent->name,
+       ];
     }
 }

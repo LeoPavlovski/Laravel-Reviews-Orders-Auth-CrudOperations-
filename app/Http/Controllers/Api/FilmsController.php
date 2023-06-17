@@ -22,7 +22,7 @@ class FilmsController extends Controller
     {
         $films = Film::all();
         return response()->json([
-            "data" =>new FilmResource($films),
+            "data" => FilmResource::collection($films),
             "status"=>200
         ]);
     }
@@ -33,6 +33,7 @@ class FilmsController extends Controller
     public function store(Request $request)
     {
         $films = Film::create([
+           'premier_week'=>$request->premier_week,
            'city'=>$request->city,
            'formats'=>$request->formats,
            'oscar_id'=>$request->oscar_id,
@@ -53,12 +54,13 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        $films = Film::create([
+        $film ->update([
+            'premier_week'=>$request->premier_week,
             'city'=>$request->city,
             'formats'=>$request->formats,
             'oscar_id'=>$request->oscar_id,
         ]);
-        return new FilmResource($films);
+        return new FilmResource($film);
     }
 
     /**

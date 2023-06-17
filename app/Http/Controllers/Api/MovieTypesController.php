@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MovieTypeResource;
-use App\Models\MovieTypes;
+use App\Models\MovieType;
 use Illuminate\Http\Request;
 
 
@@ -25,7 +25,7 @@ class MovieTypesController extends Controller
      */
     public function index()
     {
-        $types = MovieTypes::all();
+        $types = MovieType::all();
         return MovieTypeResource::collection($types);
     }
 
@@ -34,8 +34,8 @@ class MovieTypesController extends Controller
      */
     public function store(Request $request)
     {
-        $types = MovieTypes::create([
-           'type'=>$request->type,
+        $types = MovieType::create([
+           'types'=>$request->types,
         ]);
         return new MovieTypeResource($types);
     }
@@ -43,7 +43,7 @@ class MovieTypesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MovieTypes $movieType)
+    public function show(MovieType $movieType)
     {
         return new MovieTypeResource($movieType);
     }
@@ -51,18 +51,18 @@ class MovieTypesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MovieTypes $movieType)
+    public function update(Request $request, MovieType $movieType)
     {
-        $types = MovieTypes::create([
-           'type'=>$request->type,
+        $movieType->update([
+           'types'=>$request->types,
         ]);
-        return new MovieTypeResource($types);
+        return new MovieTypeResource($movieType);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MovieTypes $movieType)
+    public function destroy(MovieType $movieType)
     {
         $movieType->delete();
         return response()->json([

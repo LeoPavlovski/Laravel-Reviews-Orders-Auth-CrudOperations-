@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 //            $table->timestamps();
 //        });
 //    }
-class MovieTypes extends Model
+class MovieType extends Model
 {
     use HasFactory;
     protected $fillable = [
       'types'
     ];
+
+
 }

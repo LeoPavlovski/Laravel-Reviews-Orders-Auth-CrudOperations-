@@ -18,7 +18,7 @@ class Premier extends Model
     protected $fillable =[
       'first_week',
       'city',
-      'format',
+      'formats',
       'premier_id',
     ];
     public function premier(){

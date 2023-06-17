@@ -11,9 +11,12 @@ class PremierTypeResource extends JsonResource
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
+     *      'types'
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+      return [
+        'types'=>$this->types
+      ];
     }
 }
