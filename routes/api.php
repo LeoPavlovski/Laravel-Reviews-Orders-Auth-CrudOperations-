@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ActorController;
 use App\Http\Controllers\Api\ActorMovieController;
 use App\Http\Controllers\Api\AdminPromotesController;
+use App\Http\Controllers\Api\ModeratorController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\AuthenticationController;
@@ -110,7 +111,6 @@ Route::middleware('auth:sanctum')->group( function (){
     Route::delete('/deleteRole/{role}',[RoleController::class,'destroy']);
 
     //When Admin Promotes
-
     Route::put('/admin/promote/user/to/admin/{user}',[AdminPromotesController::class, 'PromotingUserToAdmin']);
     Route::put('/admin/promote/moderator/to/admin/{user}',[AdminPromotesController::class, 'PromotingModeratorToAdmin']);
     Route::put('/admin/promote/user/to/moderator/{user}',[AdminPromotesController::class,'PromotingUserToModerator']);
@@ -119,14 +119,17 @@ Route::middleware('auth:sanctum')->group( function (){
     Route::put('/admin/downgrade/admin/to/user/{user}',[AdminPromotesController::class, 'DemotingAdminToUser']);
     Route::put('/admin/downgrade/moderator/to/user/{user}',[AdminPromotesController::class,'DemotingModeratorsToUsers']);
 
+    //When Moderator Promotes=
+    Route::put('/moderator/promote/user/to/moderator/{user}',[ModeratorController::class, 'PromoteUserToModerator']);
+    //When Moderator Downgrades
+    Route::put('/moderator/downgrade/moderator/to/user/{user}',[ModeratorController::class,'DemotingModeratorToUser']);
 
-//    Route::put('/authMod/admin/{user}',[AdminPromotesController::class, 'authenticateModerator']);
-//    Route::put('/authAdmin/admin/{user}',[AdminPromotesController::class, 'authenticateAdmin']);
-
-
+    /**
+        Make Some message that the users, can't promote
+     **/
 
 });
-//This is for the users
+//Register and Login
 Route::post('/auth/register', [AuthenticationController::class, 'register']);
 Route::post('/auth/login', [AuthenticationController::class ,'login']);
 
