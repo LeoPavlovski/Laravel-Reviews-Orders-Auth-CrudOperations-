@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DirectorResource;
 use App\Models\Director;
 use Illuminate\Http\Request;
-
+//     $table->id();
+//            $table->string('name');
+//            $table->string('surname');
+//            $table->string('expertise');
+//            $table->string('genre');
+//            $table->timestamps();
 class DirectorController extends Controller
 {
     /**
@@ -13,7 +19,8 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        //
+        $directors = Director::all();
+        return DirectorResource::collection($directors);
     }
 
     /**
@@ -21,7 +28,13 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $directors = Director::create([
+           'name'=>$request->name,
+           'surname'=>$request->surname,
+           'expertise'=>$request->expertise,
+           'genre'=>$request->genre
+        ]);
+        return new DirectorResource($directors);
     }
 
     /**
@@ -29,7 +42,7 @@ class DirectorController extends Controller
      */
     public function show(Director $director)
     {
-        //
+        return new DirectorResource($director);
     }
 
     /**
@@ -37,7 +50,13 @@ class DirectorController extends Controller
      */
     public function update(Request $request, Director $director)
     {
-        //
+        $director->update([
+          'name'=>$request->name,
+          'surname'=>$request->surname,
+          'expertise'=>$request->expertise,
+          'genre'=>$request->genre
+        ]);
+        return new DirectorResource($director);
     }
 
     /**
@@ -45,6 +64,9 @@ class DirectorController extends Controller
      */
     public function destroy(Director $director)
     {
-        //
+        $director->delete();
+        return response()->json([
+           'Director Deleted'
+        ]);
     }
 }

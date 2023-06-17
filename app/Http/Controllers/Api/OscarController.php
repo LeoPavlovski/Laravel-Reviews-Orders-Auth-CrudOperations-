@@ -3,9 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OscarResource;
 use App\Models\Oscar;
 use Illuminate\Http\Request;
 
+//  $table->id();
+//            $table->string('role');
+//            $table->year('year');
+//            $table->unsignedBigInteger('actor_id');
+//            $table->foreign('actor_id')->references('id')->on('actors');
+//            $table->timestamps();
 class OscarController extends Controller
 {
     /**
@@ -13,7 +20,8 @@ class OscarController extends Controller
      */
     public function index()
     {
-        //
+        $oscars = Oscar::all();
+        return OscarResource::collection($oscars);
     }
 
     /**
@@ -21,7 +29,12 @@ class OscarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $oscars = Oscar::create([
+            'role'=>$request->role,
+            'year'=>$request->year,
+            'actor_id'=>$request->actor_id,
+        ]);
+        return new OscarResource($oscars);
     }
 
     /**
@@ -29,7 +42,7 @@ class OscarController extends Controller
      */
     public function show(Oscar $oscar)
     {
-        //
+        return new OscarResource($oscar);
     }
 
     /**
@@ -37,7 +50,12 @@ class OscarController extends Controller
      */
     public function update(Request $request, Oscar $oscar)
     {
-        //
+        $oscar->update([
+           'role'=>$request->role,
+           'year'=>$request->year,
+           'actor_id'=>$request->actor_id
+        ]);
+        return new OscarResource($oscar);
     }
 
     /**
@@ -45,6 +63,9 @@ class OscarController extends Controller
      */
     public function destroy(Oscar $oscar)
     {
-        //
+        $oscar->delete();
+        return response()->json([
+           'Item has been deleted'
+        ]);
     }
 }

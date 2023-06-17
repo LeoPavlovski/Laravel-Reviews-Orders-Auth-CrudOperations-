@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('premier_week');
             $table->string('city');
-            $table->string('format');
+            $table->string('formats');
             $table->unsignedBigInteger('oscar_id');
             $table->foreign('oscar_id')->references('id')->on('oscars');
             $table->timestamps();

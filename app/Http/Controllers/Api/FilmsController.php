@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FilmResource;
 use App\Models\Film;
 use Illuminate\Http\Request;
+//$table->string('premier_week');
+//            $table->string('city');
+//            $table->string('formats');
+//            $table->unsignedBigInteger('oscar_id');
+//            $table->foreign('oscar_id')->references('id')->on('oscars');
+//            $table->timestamps();
 
 class FilmsController extends Controller
 {
@@ -13,7 +20,11 @@ class FilmsController extends Controller
      */
     public function index()
     {
-        //
+        $films = Film::all();
+        return response()->json([
+            "data" =>new FilmResource($films),
+            "status"=>200
+        ]);
     }
 
     /**
@@ -21,7 +32,12 @@ class FilmsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $films = Film::create([
+           'city'=>$request->city,
+           'formats'=>$request->formats,
+           'oscar_id'=>$request->oscar_id,
+        ]);
+        return new FilmResource($films);
     }
 
     /**
@@ -29,7 +45,7 @@ class FilmsController extends Controller
      */
     public function show(Film $film)
     {
-        //
+        return new FilmResource($film);
     }
 
     /**
@@ -37,7 +53,12 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        //
+        $films = Film::create([
+            'city'=>$request->city,
+            'formats'=>$request->formats,
+            'oscar_id'=>$request->oscar_id,
+        ]);
+        return new FilmResource($films);
     }
 
     /**
@@ -45,6 +66,9 @@ class FilmsController extends Controller
      */
     public function destroy(Film $film)
     {
-        //
+        $film->delete();
+        return response()->json([
+           "Film Deleted"
+        ]);
     }
 }

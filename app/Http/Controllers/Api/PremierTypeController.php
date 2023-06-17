@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PremierResource;
 use App\Models\PremierTypes;
 use Illuminate\Http\Request;
-
+// $table->string('types');
 class PremierTypeController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $premiers = PremierTypes::all();
+        return PremierResource::collection($premiers);
     }
 
     /**
@@ -21,7 +24,10 @@ class PremierTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $premiers= PremierTypes::create([
+            'types'=>$request->type,
+        ]);
+        return new PremierResource($premiers);
     }
 
     /**
@@ -29,7 +35,7 @@ class PremierTypeController extends Controller
      */
     public function show(PremierTypes $premierTypes)
     {
-        //
+        return new PremierResource($premierTypes);
     }
 
     /**
@@ -37,7 +43,10 @@ class PremierTypeController extends Controller
      */
     public function update(Request $request, PremierTypes $premierTypes)
     {
-        //
+        $premierTypes= PremierTypes::create([
+            'types'=>$request->type,
+        ]);
+        return new PremierResource($premierTypes);
     }
 
     /**
@@ -45,6 +54,7 @@ class PremierTypeController extends Controller
      */
     public function destroy(PremierTypes $premierTypes)
     {
-        //
+        $premierTypes->delete();
+
     }
 }

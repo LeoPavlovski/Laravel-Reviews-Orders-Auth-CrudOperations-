@@ -25,13 +25,13 @@ class FilmSeeder extends Seeder
             [
                 "premier_week"=>'week1',
                 'city'=>'Tetovo',
-                'format'=>'dadwdasd',
+                'formats'=>'dadwdasd',
                 'oscar_id'=>1
             ],
             [
                 "premier_week"=>'week1',
                 'city'=>'Tetovo',
-                'format'=>'dadwdasd',
+                'formats'=>'dadwdasd',
                 'oscar_id'=>1
             ],
         ]);

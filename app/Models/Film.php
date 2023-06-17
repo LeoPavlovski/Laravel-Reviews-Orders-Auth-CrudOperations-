@@ -17,7 +17,7 @@ class Film extends Model
     protected $fillable =[
       'premier_week',
       'city',
-      'format',
+      'formats',
       'oscar_id',
     ];
     public function oscar(){

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TVResource;
 use App\Models\TV;
 use Illuminate\Http\Request;
+//"tv_channel"=>'telma',
+//                'episodes'=>'something',
+//                'actor_id'=>1,
 
 class TvSerieController extends Controller
 {
@@ -13,7 +17,8 @@ class TvSerieController extends Controller
      */
     public function index()
     {
-        //
+        $series = TV::all();
+        return TVResource::collection($series);
     }
 
     /**
@@ -21,7 +26,12 @@ class TvSerieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $series = TV::create([
+           'tv_channel'=>$request->tv_channel,
+           'episodes'=>$request->episodes,
+           'actor_id'=>$request->actor_id
+        ]);
+        return new TVResource($series);
     }
 
     /**
@@ -29,7 +39,7 @@ class TvSerieController extends Controller
      */
     public function show(TV $tV)
     {
-        //
+        return new TVResource($tV);
     }
 
     /**
@@ -37,7 +47,12 @@ class TvSerieController extends Controller
      */
     public function update(Request $request, TV $tV)
     {
-        //
+        $tV->update([
+            'tv_channel'=>$request->tv_channel,
+            'episodes'=>$request->episodes,
+            'actor_id'=>$request->actor_id
+        ]);
+        return new TVResource($tV);
     }
 
     /**
@@ -45,6 +60,9 @@ class TvSerieController extends Controller
      */
     public function destroy(TV $tV)
     {
-        //
+        $tV->delete();
+        return response()->json([
+           'Tv Series Deleted'
+        ]);
     }
 }
