@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             TVSeeder::class,
             FilmSeeder::class,
             Actor_Movie_Seeder::class,
+            ROLE::class,
+            UserSeeder::class,
         ]);
     }
 }
