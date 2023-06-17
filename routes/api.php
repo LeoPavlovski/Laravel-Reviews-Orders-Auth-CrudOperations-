@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\ActorController;
 use App\Http\Controllers\Api\ActorMovieController;
+use App\Http\Controllers\Api\AdminPromotesController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\DirectorController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\Api\OscarController;
 use App\Http\Controllers\Api\PremierController;
 use App\Http\Controllers\Api\PremierTypeController;
 use App\Http\Controllers\Api\TvSerieController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -89,7 +92,7 @@ Route::middleware('auth:sanctum')->group( function (){
     Route::get('/getMovieType/{movieType}',[MovieTypesController::class,'show']);
     Route::post('/createMovieType',[MovieTypesController::class,'store']);
     Route::put('/updateMovieType/{movieType}',[MovieTypesController::class,'update']);
-    Route::delete('/Deletemovietype/{movieType}',[MovieTypesController::class,'destroy']);
+    Route::delete('/deletemovietype/{movieType}',[MovieTypesController::class,'destroy']);
 
 
     Route::get('/getTVS',[TVSerieController::class,'index']);
@@ -97,7 +100,33 @@ Route::middleware('auth:sanctum')->group( function (){
     Route::get('/getTv/{tv}',[TvSerieController::class,'show']);
     Route::put('/updateTv/{tv}',[TvSerieController::class,'update']);
     Route::delete('/deleteTv/{tv}',[TvSerieController::class,'destroy']);
-});
 
+    //Getting the roles
+    //Not everyone can do this. (only if the user is admin)
+    Route::get('/getRoles',[RoleController::class, 'index']);
+    Route::get('/getRole/{role}',[RoleController::class, 'show']);
+    Route::post('/createRole',[RoleController::class,'store']);
+    Route::put('/editRole/{role}',[RoleController::class,'update']);
+    Route::delete('/deleteRole/{role}',[RoleController::class,'destroy']);
+
+    //When Admin Promotes
+
+    Route::put('/admin/promote/user/to/admin/{user}',[AdminPromotesController::class, 'PromotingUserToAdmin']);
+    Route::put('/admin/promote/moderator/to/admin/{user}',[AdminPromotesController::class, 'PromotingModeratorToAdmin']);
+    Route::put('/admin/promote/user/to/moderator/{user}',[AdminPromotesController::class,'PromotingUserToModerator']);
+    //When Admin Demotes
+    Route::put('/admin/downgrade/admin/to/moderator/{user}',[AdminPromotesController::class, 'DemotingAdminToModerator']);
+    Route::put('/admin/downgrade/admin/to/user/{user}',[AdminPromotesController::class, 'DemotingAdminToUser']);
+    Route::put('/admin/downgrade/moderator/to/user/{user}',[AdminPromotesController::class,'DemotingModeratorsToUsers']);
+
+
+//    Route::put('/authMod/admin/{user}',[AdminPromotesController::class, 'authenticateModerator']);
+//    Route::put('/authAdmin/admin/{user}',[AdminPromotesController::class, 'authenticateAdmin']);
+
+
+
+});
+//This is for the users
 Route::post('/auth/register', [AuthenticationController::class, 'register']);
 Route::post('/auth/login', [AuthenticationController::class ,'login']);
+
