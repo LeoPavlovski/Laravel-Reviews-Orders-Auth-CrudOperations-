@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ActorResource;
 use App\Models\Actor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 // $table->id();
 //            $table->string('name');
@@ -30,21 +31,68 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        $actor= Actor::create([
-           "name"=>$request->name,
-           "nickname"=>$request->nickname,
-           "date_of_birth"=>$request->date_of_birth,
-           "agent_id"=>$request->agent_id,
+        $validator = Validator::make($request->all, [
+            //Testing for the creation of the actors.
+            'name' => 'required|max:20|string|unique:actors',
+            'nickname' => 'required|max:20|unique:actors',
+            'date_of_birth' => 'required|max:20',
+            'agent_id' => 'required|max:20|integer'
         ]);
-        return new ActorResource($actor);
+
+        if ($validator->fails()) {
+            //display the errors
+            return response()->json([
+                'errors' => $validator->errors()
+            ]);
+        } else if ($validator->passes()) {
+            $actor = Actor::create([
+                "name" => $request->name,
+                "nickname" => $request->nickname,
+                "date_of_birth" => $request->date_of_birth,
+                "agent_id" => $request->agent_id,
+            ]);
+            return response()->json([
+                'data' => new ActorResource($actor),
+                'message' => 'Actor Has Been Created!',
+                'status' => 200
+            ]);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Actor $actor)
+    public function show(Request $request, $actorId)
     {
-        return new ActorResource($actor);
+        $actor = Actor::find($actorId);
+        //i can use pluck for everything to make the validation even better.
+        $actorNumbers =Actor::pluck('id')->toArray();
+        $actorNames =Actor::pluck('name')->toArray();
+        if (!$actor) {
+            return response()->json([
+                'message' => 'Actor Doesnt exist!',
+                'message2'=>"Pick a number from the data object",
+                'data'=>$actorNumbers,
+                'data2'=>$actorNames
+            ]);
+        }
+        //check the actor numbers
+
+        $validator = Validator
+            ::make(['actor_id' => $actor->id],
+                ['actor_id' => 'required|integer']
+            );
+        if ($validator->fails()) {
+            //Failed Validator display errors
+            return response()->json([
+               'errors'=>$validator->errors()
+            ]);
+        } else
+            return response()->json([
+                'data' => new ActorResource($actor),
+                'status' => 200,
+                'message' => 'Validator Passed1!'
+            ]);
     }
 
     /**

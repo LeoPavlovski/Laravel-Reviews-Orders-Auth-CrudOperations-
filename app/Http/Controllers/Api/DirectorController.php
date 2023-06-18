@@ -6,11 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DirectorResource;
 use App\Models\Director;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\QueryBuilder;
+
+
+
 //     $table->id();
 //            $table->string('name');
 //            $table->string('surname');
 //            $table->string('expertise');
 //            $table->string('genre');
+
 //            $table->timestamps();
 class DirectorController extends Controller
 {
@@ -20,6 +26,15 @@ class DirectorController extends Controller
     public function index()
     {
         $directors = Director::all();
+        return DirectorResource::collection($directors);
+    }
+    public function queries(){
+        $query = Director::query();
+        $directors = QueryBuilder::for($query)
+            ->allowedFilters('name')
+            ->allowedSorts('name','surname','expertise','genre')
+            ->allowedIncludes('')
+            ->get();
         return DirectorResource::collection($directors);
     }
 
@@ -69,4 +84,5 @@ class DirectorController extends Controller
            'Director Deleted'
         ]);
     }
+
 }

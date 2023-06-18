@@ -133,3 +133,7 @@ Route::middleware(['auth:sanctum','api.throttle:10,1'])->group( function (){
 Route::post('/auth/register', [AuthenticationController::class, 'register']);
 Route::post('/auth/login', [AuthenticationController::class ,'login']);
 
+//Queries
+
+Route::get('Director/Query', [DirectorController::class ,'queries']);
+
