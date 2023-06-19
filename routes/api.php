@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ActorController;
 use App\Http\Controllers\Api\ActorMovieController;
 use App\Http\Controllers\Api\AdminPromotesController;
+use App\Http\Controllers\Api\FleeceController;
 use App\Http\Controllers\Api\ModeratorController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\AgentController;
@@ -40,18 +41,22 @@ Route::middleware(['auth:sanctum','api.throttle:10,1'])->group( function (){
     Route::post('/createActor',[ActorController::class,'store']);
     Route::put('/updateActor/{actor}',[ActorController::class,'update']);
     Route::delete('/deleteActor/{actor}',[ActorController::class,'destroy']);
-
+//TODO fix the actor movies, because we don't have a id in the migration.
     Route::get('/getActorMovies',[ActorMovieController::class,'index']);
     Route::get('/getActorMovie/{actor_movie}',[ActorMovieController::class,'show']);
     Route::post('/createActorMovie',[ActorMovieController::class,'store']);
     Route::put('/updateActorMovie/{actor_movie}',[ActorMovieController::class,'update']);
     Route::delete('/deleteActorMovie/{actor_movie}',[ActorMovieController::class,'destroy']);
 
+//Tested : Works.
     Route::get('/getAgents',[AgentController::class,'index']);
     Route::get('/getAgent/{agent}',[AgentController::class,'show']);
     Route::post('/createAgent',[AgentController::class,'store']);
     Route::put('/updateAgent/{agent}',[AgentController::class,'update']);
     Route::delete('/deleteAgent/{agent}',[AgentController::class,'destroy']);
+    //New
+
+    Route::delete('/deleteAgentConfirmation/{agent}',[AgentController::class,'confirmDelete']);
 
     Route::get('/getDirectors',[DirectorController::class,'index']);
     Route::get('/getDirector/{director}',[DirectorController::class,'show']);
@@ -101,6 +106,10 @@ Route::middleware(['auth:sanctum','api.throttle:10,1'])->group( function (){
     Route::get('/getTv/{tv}',[TvSerieController::class,'show']);
     Route::put('/updateTv/{tv}',[TvSerieController::class,'update']);
     Route::delete('/deleteTv/{tv}',[TvSerieController::class,'destroy']);
+
+//TODO FLEECE PEDERO
+
+    Route::post('/createItem',[FleeceController::class,'store']);
 
     //Getting the roles
     //Not everyone can do this. (only if the user is admin)

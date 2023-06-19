@@ -14,6 +14,6 @@ class Agent extends Model
 //            $table->timestamps();
     protected $fillable= [
       'name',
-      'code'
+      'code',
     ];
 }

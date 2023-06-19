@@ -21,6 +21,7 @@ class ActorMovieController extends Controller
      */
     public function index()
     {
+
         $actor_movie = ActorMovie::all();
         return ActorMovieResource::collection($actor_movie);
     }

@@ -21,11 +21,13 @@ class AgentSeeder extends Seeder
         DB::table('agents')->insert([
          [
              "name"=>'leo',
-             'code'=>'MKD123##'
+             'code'=>'MKD123##',
+
          ],
             [
                 "name"=>'Marko',
-                'code'=>'ADJ##11##'
+                'code'=>'ADJ##11##',
+
             ],
         ]);
     }

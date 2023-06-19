@@ -23,6 +23,11 @@ class ROLE extends Seeder
                 'role'=>ROLES::User->name,
                 'id'=>ROLES::User->value
             ],
+            [
+                'role'=>ROLES::Moderator->name,
+                'id'=>ROLES::Moderator->value
+            ],
+
         ]);
     }
 }

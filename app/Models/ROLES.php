@@ -9,4 +9,5 @@ enum ROLES :int
 {
     case Admin =1;
     case User=2;
+    case Moderator=3;
 }

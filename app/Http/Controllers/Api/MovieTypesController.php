@@ -26,6 +26,11 @@ class MovieTypesController extends Controller
     public function index()
     {
         $types = MovieType::all();
+        if($types->isEmpty()){
+            return response()->json([
+
+            ]);
+        }
         return MovieTypeResource::collection($types);
     }
 

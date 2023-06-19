@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActorResource;
 use App\Models\Actor;
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 // $table->id();
 //            $table->string('name');
@@ -22,23 +24,36 @@ class ActorController extends Controller
      */
     public function index()
     {
+        //VALIDATION IN ROUTE : Route::get('/api/getActors')
         $actor = Actor::all();
+        if($actor->isEmpty()){
+            return response()->json([
+               //Actors don't exist
+                'message'=>'No Data in Actors'
+            ]);
+        }
         return ActorResource::collection($actor);
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+        //TODO make more validation ( because we are not getting id from the routes, we dont need to test for ID)
+        //TODO test if the actor already exist with the same nickname (it's gonna work with the validator)
     {
-        $validator = Validator::make($request->all, [
+        $validator = Validator::make($request->all(), [
             //Testing for the creation of the actors.
-            'name' => 'required|max:20|string|unique:actors',
-            'nickname' => 'required|max:20|unique:actors',
-            'date_of_birth' => 'required|max:20',
-            'agent_id' => 'required|max:20|integer'
-        ]);
+                'name' => 'required|max:20|string|unique:actors,name',
+                'nickname' => 'required|max:20|unique:actors,nickname',
+                'date_of_birth' => 'required|date_format:Y-m-d',
+                'agent_id' => [
+                'required',
+                'integer',
 
+               Rule::exists('agents', 'id'),
+            ]
+        ]);
+        $agentId = $request->agent_id;
         if ($validator->fails()) {
             //display the errors
             return response()->json([
@@ -49,7 +64,7 @@ class ActorController extends Controller
                 "name" => $request->name,
                 "nickname" => $request->nickname,
                 "date_of_birth" => $request->date_of_birth,
-                "agent_id" => $request->agent_id,
+                "agent_id" => $agentId
             ]);
             return response()->json([
                 'data' => new ActorResource($actor),
@@ -58,7 +73,6 @@ class ActorController extends Controller
             ]);
         }
     }
-
     /**
      * Display the specified resource.
      */
@@ -66,8 +80,10 @@ class ActorController extends Controller
     {
         $actor = Actor::find($actorId);
         //i can use pluck for everything to make the validation even better.
+        //Testing for route ROUTE::get('getActor/1')
         $actorNumbers =Actor::pluck('id')->toArray();
         $actorNames =Actor::pluck('name')->toArray();
+        //If actor doesn't exist
         if (!$actor) {
             return response()->json([
                 'message' => 'Actor Doesnt exist!',
@@ -77,7 +93,6 @@ class ActorController extends Controller
             ]);
         }
         //check the actor numbers
-
         $validator = Validator
             ::make(['actor_id' => $actor->id],
                 ['actor_id' => 'required|integer']
@@ -96,17 +111,51 @@ class ActorController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage..
+     * We can send the model instance, but we can also send the ID in the parameter in order to retrieve information about the actor.
+     * We can use this to check the data in the model.
      */
-    public function update(Request $request, Actor $actor)
+    public function update(Request $request, $actorId)
     {
-        $actor->update([
-           "name"=>$request->name,
-           "nickname"=>$request->nickname,
-           "date_of_birth"=>$request->date_of_birth,
-           "agent_id"=>$request->agent_id,
-        ]);
-        return new ActorResource($actor);
+        //Updating Actor
+        $validator = Validator::make($request->all(),[
+              'name'=>'required|string|max:20',
+                'nickname'=>'required|string|max:20|unique:actors,nickname',
+                //TODO DO MORE TESTS ABOUT THE DATE(format)
+                'date_of_birth'=>'required|date_format:Y-m-d',
+                'agent_id'=>'required|integer'
+         ]);
+        $actor = Actor::find($actorId);
+        $actorIds = Actor::pluck('id')->toArray();
+        $actorNames = Actor::pluck('name')->toArray();
+        if(!$actor){
+            //Actor doesnt exist
+            return response()->json([
+                'message'=>'Actor Doesnt exist try some other number',
+                'data'=>$actorIds,
+                'actorNames'=>$actorNames
+            ]);
+        }
+            if($validator->fails()){
+                //display all of the errors.
+                return response()->json([
+                   'errors'=>$validator->errors()
+                ]);
+            }
+            else if($validator->passes()){
+
+                $actor->update([
+                    "name"=>$request->name,
+                    "nickname"=>$request->nickname,
+                    "date_of_birth"=>$request->date_of_birth,
+                    "agent_id"=>$request->agent_id,
+                ]);
+                return response()->json([
+                   //Validator passed
+                  'message'=>'Actor Updated!',
+                    'data'=> new ActorResource($actor)
+                ]);
+            }
     }
 
     /**
@@ -114,9 +163,9 @@ class ActorController extends Controller
      */
     public function destroy(Actor $actor)
     {
-        $actor->delete();
-        return response()->json([
-           "Item Has been deleted"
-        ]);
+            $actor->delete();
+            return response()->json([
+               "Item Has been deleted"
+            ]);
     }
 }

@@ -21,7 +21,14 @@ class OscarController extends Controller
     public function index()
     {
         $oscars = Oscar::all();
-        return OscarResource::collection($oscars);
+        if($oscars->isEmpty()){
+            return response()->json([
+                'message'=>'This is empty'
+            ]);
+        }
+        else{
+            return OscarResource::collection($oscars);
+        }
     }
 
     /**
@@ -29,6 +36,8 @@ class OscarController extends Controller
      */
     public function store(Request $request)
     {
+        //validation for oscars
+        //TODO IMPLEMENT THE VALIDATION FOR OSCARS PREMIERS TVSERIES etc (same logic)
         $oscars = Oscar::create([
             'role'=>$request->role,
             'year'=>$request->year,
@@ -36,7 +45,6 @@ class OscarController extends Controller
         ]);
         return new OscarResource($oscars);
     }
-
     /**
      * Display the specified resource.
      */

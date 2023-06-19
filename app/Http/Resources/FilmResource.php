@@ -25,7 +25,7 @@ class FilmResource extends JsonResource
         return [
            'premier_week'=>$this->premier_week,
             'city'=>$this->city,
-            'format'=>$this->format,
+            'formats'=>$this->formats,
             'oscar_id'=>$this->oscar_id,
         ];
     }
