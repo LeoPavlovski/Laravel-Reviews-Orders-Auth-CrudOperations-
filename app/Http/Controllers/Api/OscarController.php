@@ -42,6 +42,7 @@ class OscarController extends Controller
             'role'=>$request->role,
             'year'=>$request->year,
             'actor_id'=>$request->actor_id,
+
         ]);
         return new OscarResource($oscars);
     }
