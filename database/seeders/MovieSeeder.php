@@ -21,7 +21,7 @@ class MovieSeeder extends Seeder
     {
         DB::table('movies')->insert([
             [
-                "name"=>'leo',
+                "name"=>'lord of the rings',
                 'director_id'=>1,
                 'salary'=>123123,
             ],

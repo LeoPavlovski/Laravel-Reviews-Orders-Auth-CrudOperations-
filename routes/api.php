@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\ActorMovieController;
 use App\Http\Controllers\Api\AdminPromotesController;
 use App\Http\Controllers\Api\FleeceController;
 use App\Http\Controllers\Api\ModeratorController;
+use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\AuthenticationController;
@@ -109,7 +111,6 @@ Route::middleware(['auth:sanctum','api.throttle:10,1'])->group( function (){
 
 //TODO FLEECE PEDERO
 
-    Route::post('/createItem',[FleeceController::class,'store']);
 
     //Getting the roles
     //Not everyone can do this. (only if the user is admin)
@@ -145,4 +146,20 @@ Route::post('/auth/login', [AuthenticationController::class ,'login']);
 //Queries
 
 Route::get('Director/Query', [DirectorController::class ,'queries']);
+
+//Reported
+
+Route::get('/getReports',[ReportController::class,'index']);
+Route::get('/getReport/{report}',[ReportController::class,'show']);
+Route::post('/createReport',[ReportController::class,'store']);
+Route::put('/updateReport/{report}',[ReportController::class,'update']);
+Route::delete('/deleteReport/{report}',[ReportController::class,'destroy']);
+
+//Reviews
+
+Route::get('/getReviews',[ReviewController::class,'index']);
+Route::get('/getReview/{review}',[ReviewController::class,'show']);
+Route::post('/createReview',[ReviewController::class,'store']);
+Route::put('/updateReview/{review}',[ReviewController::class,'update']);
+Route::delete('/deleteReview/{review}',[ReviewController::class,'destroy']);
 

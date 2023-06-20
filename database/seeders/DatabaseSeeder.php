@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             Actor_Movie_Seeder::class,
             ROLE::class,
             UserSeeder::class,
+            REPORTEDSEEDER::class,
+            ReviewSeeder::class,
         ]);
     }
 }

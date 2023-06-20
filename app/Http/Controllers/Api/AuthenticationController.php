@@ -27,8 +27,8 @@ class AuthenticationController extends Controller
             ]);
         }
         $user = User::create([
-//           creating the user
-        'name'=>$request->name,
+//          creating the user
+            'name'=>$request->name,
             'email'=>$request->email,
             'password'=>$request->password
         ]);
@@ -37,7 +37,6 @@ class AuthenticationController extends Controller
             "message"=>'User Created Successfuly',
             "token" =>$user->createToken("API TOKEN")->plainTextToken
         ]);
-
     }
     public function login (Request $request){
         // check the user credentials
