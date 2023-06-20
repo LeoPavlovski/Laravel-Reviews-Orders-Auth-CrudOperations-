@@ -12,9 +12,13 @@ class Appointment extends Model
       //this is for the appointments
         'start_date',
         'end_date',
-        'user_id'
+        'user_id',
+        'doctor_id'
     ];
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    public function doctor(){
+        return $this->belongsTo(Doctor::class);
     }
 }

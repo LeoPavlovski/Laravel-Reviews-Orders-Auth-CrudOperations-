@@ -18,19 +18,22 @@ class AppointmentSeeder extends Seeder
               'start_date'=>'2023-10-10 10:50:00',
               'end_date'=>'2023-10-10 11:50:00',
 //              Is this the user who is going to be here
-               'user_id'=>2
+               'user_id'=>2,
+                'doctor_id'=>1
             ],
             [
                 'start_date'=>'2023-10-10 09:50:00',
                 'end_date'=>'2023-10-10 11:50:00',
 //              Is this the user who is going to be here
-                'user_id'=>2
+                'user_id'=>2,
+                'doctor_id'=>1
             ],
             [
                 'start_date'=>'2023-10-10 08:25:30',
                 'end_date'=>'2023-10-10 09:50:00',
 //              Is this the user who is going to be here
-                'user_id'=>2
+                'user_id'=>2,
+                'doctor_id'=>1
             ],
         ]);
     }
