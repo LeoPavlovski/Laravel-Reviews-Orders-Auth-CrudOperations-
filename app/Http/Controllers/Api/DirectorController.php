@@ -41,7 +41,6 @@ class DirectorController extends Controller
         $directors = QueryBuilder::for($query)
             ->allowedFilters('name')
             ->allowedSorts('name','surname','expertise','genre')
-            ->allowedIncludes('')
             ->get();
         return DirectorResource::collection($directors);
     }
