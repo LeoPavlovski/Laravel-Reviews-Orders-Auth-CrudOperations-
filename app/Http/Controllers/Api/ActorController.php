@@ -9,6 +9,7 @@ use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Spatie\QueryBuilder\QueryBuilder;
 
 // $table->id();
 //            $table->string('name');
@@ -33,6 +34,18 @@ class ActorController extends Controller
             ]);
         }
         return ActorResource::collection($actor);
+    }
+    //      'name',
+    //      'nickname',
+    //      'date_of_birth',
+    //      'agent_id',
+    public function query(){
+        $query = Actor::query();
+        $actors = QueryBuilder::for($query)
+        ->allowedFilters('name','nickname','date_of_birth','agent_id')
+        ->allowedSorts('name','nickname','date_of_birth','agent_id')
+        ->allowedIncludes('agent')->get();
+        return ActorResource::collection($actors);
     }
     /**
      * Store a newly created resource in storage.

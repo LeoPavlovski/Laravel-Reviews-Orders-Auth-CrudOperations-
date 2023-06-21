@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 //// $table->id();
@@ -25,8 +26,8 @@ class ActorResource extends JsonResource
            'nickname'=>$this->nickname,
            'date'=>$this->date,
            'agent_id'=>$this->agent_id,
-           'agent_code'=>$this->agent->code,
-           'agent_name'=>$this->agent->name,
+
+           'agent' => new AgentResource($this->whenLoaded('agent')),
        ];
     }
 }
