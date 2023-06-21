@@ -27,6 +27,13 @@ class ActorSeeder extends Seeder
                 'date_of_birth'=>'2023-10-10',
                 'agent_id'=>1
             ],
+
+            [
+                "name"=>'Angel',
+                'nickname'=>'something',
+                'date_of_birth'=>'2023-10-10',
+                'agent_id'=>1
+            ],
         ]);
     }
 }

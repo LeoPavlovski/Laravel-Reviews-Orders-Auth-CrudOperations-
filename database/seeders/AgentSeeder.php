@@ -29,6 +29,10 @@ class AgentSeeder extends Seeder
                 'code'=>'ADJ##11##',
 
             ],
+            [
+                "name"=>'Agent',
+                'code'=>'lasdkd',
+            ]
         ]);
     }
 }

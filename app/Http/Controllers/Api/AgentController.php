@@ -7,6 +7,7 @@ use App\Http\Resources\AgentResource;
 use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\QueryBuilder;
 
 //   Schema::create('agents', function (Blueprint $table) {
 //            $table->id();
@@ -31,6 +32,13 @@ class AgentController extends Controller
         }
         return AgentResource::collection($agents);
     }
+    public function query(){
+        $query = Agent::query();
+        $agents = QueryBuilder::for($query)->allowedFilters('name','code')
+         ->allowedSorts('name','code')->get();
+        return AgentResource::collection($agents);
+    }
+
 
     /**
      * Store a newly created resource in storage.
