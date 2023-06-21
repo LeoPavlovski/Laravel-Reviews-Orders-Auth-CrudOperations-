@@ -26,7 +26,7 @@ class MovieSeeder extends Seeder
                 'salary'=>123123,
             ],
             [
-                "name"=>'dasd',
+                "name"=>'spiderman',
                 'director_id'=>1,
                 'salary'=>12321,
             ],
