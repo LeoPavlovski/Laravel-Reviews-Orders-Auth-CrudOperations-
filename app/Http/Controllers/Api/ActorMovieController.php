@@ -7,6 +7,7 @@ use App\Http\Resources\ActorMovieResource;
 use App\Models\Actor_Movie;
 use App\Models\ActorMovie;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ActorMovieController extends Controller
 
@@ -25,6 +26,15 @@ class ActorMovieController extends Controller
         $actor_movie = ActorMovie::all();
         return ActorMovieResource::collection($actor_movie);
     }
+    public function query(){
+        $query = ActorMovie::query();
+        $actors= QueryBuilder::for($query)
+        ->allowedFilters('actor_id','movie_id')
+            ->allowedSorts('actor_id','movie_id')
+                ->allowedIncludes('movies','actors')->get();
+        return ActorMovieResource::collection($actors);
+    }
+
 
     /**
      * Store a newly created resource in storage.

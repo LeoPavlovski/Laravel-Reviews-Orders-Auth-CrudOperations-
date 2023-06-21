@@ -25,6 +25,8 @@ class ActorMovieResource extends JsonResource
             //Relationships
             'actor_id'=>$this->actor_id,
             'movie_id'=>$this->movie_id,
+            'actors'=>ActorResource::collection($this->whenLoaded('actors')),
+            'movies'=>MovieResource::collection($this->whenLoaded('movies')),
         ];
     }
 }

@@ -17,11 +17,13 @@ class ActorMovie extends Model
       'actor_id',
       'movie_id'
     ];
-
-    public function actors(){
-        return $this->belongsToMany(Actor::class);
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class, 'actor_movies', 'actor_id', 'actor_id');
     }
-    public function movies(){
-        return $this->belongsToMany(Movie::class);
+
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class, 'actor_movies', 'movie_id', 'movie_id');
     }
 }

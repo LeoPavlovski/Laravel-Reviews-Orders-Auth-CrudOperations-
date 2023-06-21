@@ -21,9 +21,15 @@ class Actor_Movie_Seeder extends Seeder
 
     public function run(): void
     {
-        DB::table('actor_movies')->insert([
+        DB::table('actor_movies')->insert(
+           [ [
          'actor_id'=>1,
          'movie_id'=>1
-        ]);
+             ],
+            [
+                'actor_id'=>2,
+                'movie_id'=>2
+            ]]
+        );
     }
 }
