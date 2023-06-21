@@ -27,6 +27,7 @@ class FilmResource extends JsonResource
             'city'=>$this->city,
             'formats'=>$this->formats,
             'oscar_id'=>$this->oscar_id,
+            'oscar'=> new OscarResource($this->whenLoaded('oscar'))
         ];
     }
 }

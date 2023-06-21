@@ -8,11 +8,19 @@ use App\Models\Film;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\QueryBuilder\QueryBuilder;
+
+
 
 class FilmsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     *   'premier_week',
+    'city',
+    'formats',
+    'oscar_id',
      */
     public function index()
     {
@@ -26,6 +34,15 @@ class FilmsController extends Controller
             "data" => FilmResource::collection($films),
             "status"=>200
         ]);
+    }
+    public function query(){
+      $query = Film::query();
+        $films = QueryBuilder::for($query)->allowedFilters('premier_week','city','formats','oscar_id')
+            ->allowedSorts('premier_week','city','formats','oscar_id')
+            ->allowedIncludes('oscar')->get();
+
+        return FilmResource::collection($films);
+
     }
 
     /**

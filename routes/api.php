@@ -109,9 +109,6 @@ Route::middleware(['auth:sanctum','api.throttle:10,1'])->group( function (){
     Route::put('/updateTv/{tv}',[TvSerieController::class,'update']);
     Route::delete('/deleteTv/{tv}',[TvSerieController::class,'destroy']);
 
-//TODO FLEECE PEDERO
-
-
     //Getting the roles
     //Not everyone can do this. (only if the user is admin)
     Route::get('/getRoles',[RoleController::class, 'index']);
@@ -146,6 +143,10 @@ Route::post('/auth/login', [AuthenticationController::class ,'login']);
 //Queries
 
 Route::get('Director/Query', [DirectorController::class ,'queries']);
+Route::get('Actor/Query',[ActorController::class,'query']);
+Route::get('/ActorMovie/Query',[ActorMovieController::class,'query']);
+Route::get('/Agent/Query',[AgentController::class,'query']);
+Route::get('/Film/Query',[FilmsController::class,'query']);
 
 //Reported
 
@@ -162,4 +163,6 @@ Route::get('/getReview/{review}',[ReviewController::class,'show']);
 Route::post('/createReview',[ReviewController::class,'store']);
 Route::put('/updateReview/{review}',[ReviewController::class,'update']);
 Route::delete('/deleteReview/{review}',[ReviewController::class,'destroy']);
+
+
 
