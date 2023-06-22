@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
 use App\Http\Resources\AdminResource;
+use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class RoleController extends Controller
 {
@@ -19,6 +21,12 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         return AdminResource::collection($roles);
+    }
+    public function query(){
+        $query = Role::query();
+        $roles = QueryBuilder::for($query)->allowedFilters('role')
+            ->allowedSorts('role')->get();
+        return RoleResource::collection($roles);
     }
 
     /**
