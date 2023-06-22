@@ -25,7 +25,9 @@ class PremierResource extends JsonResource
          'first_week'=>$this->first_week,
          'city'=>$this->city,
          'formats'=>$this->formats,
-         'premier_id'=>$this->premier_id
+         'premier_id'=>$this->premier_id,
+           //TODO FIX THE PREMIER_TYPES ENUM
+         'premier'=>new PremierResource($this->whenLoaded('premier'))
        ];
     }
 }

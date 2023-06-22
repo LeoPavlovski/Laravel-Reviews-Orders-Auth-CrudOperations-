@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PremierResource;
 use App\Models\Premier;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 //     $table->id();
 //            $table->string('first_week');
@@ -25,9 +26,21 @@ class PremierController extends Controller
         return PremierResource::collection($premiers);
     }
 
+
     /**
      * Store a newly created resource in storage.
+     *   "first_week"=>'Week1',
+    'city'=>'Tetovo',
+    'formats'=>'someformat',
+    'premier_id'=>1
      */
+    public function query(){
+        $query = Premier::query();
+        $premiers = QueryBuilder::for($query)->allowedSorts('first_week',
+        'city','formats','premier_id')->allowedFilters('first_week','city','formats','premier_id')
+         ->allowedIncludes('premier')->get();
+        return PremierResource::collection($premiers);
+    }
     public function store(Request $request)
     {
         $premiers= Premier::create([
