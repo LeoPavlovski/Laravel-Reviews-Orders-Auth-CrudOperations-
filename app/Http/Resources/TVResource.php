@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Actor;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +25,7 @@ class TVResource extends JsonResource
           'tv_channel'=>$this->tv_channel,
           'episodes'=>$this->episodes,
           'actor_id'=>$this->actor_id,
+          'actor'=>new ActorResource($this->whenLoaded('actor')),
         ];
     }
 }
