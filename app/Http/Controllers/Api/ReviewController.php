@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReviewResource;
+use App\Models\Movie;
+use App\Models\REPORTED;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Query;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ReviewController extends Controller
 {
@@ -27,6 +32,17 @@ class ReviewController extends Controller
         return ReviewResource::collection($review);
     }
 
+    //    }
+    public function query(){
+        $query = Review::query();
+        $reviews = QueryBuilder::for($query)
+        ->allowedFilters('rating','contents','likes','dislikes','votes',
+          'reported_status','report_id','user_id','movie_id')
+        ->allowedSorts('rating','contents','likes','dislikes','votes',
+         'reported_status','report_id','user_id','movie_id')
+            ->allowedIncludes('reported','user','movie','movie.director')->get();
+        return ReviewResource::collection($reviews);
+    }
     /**
      * Store a newly created resource in storage.
      */
