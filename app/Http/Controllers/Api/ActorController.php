@@ -53,6 +53,7 @@ class ActorController extends Controller
     public function store(Request $request)
         //TODO make more validation ( because we are not getting id from the routes, we dont need to test for ID)
         //TODO test if the actor already exist with the same nickname (it's gonna work with the validator)
+        //TODO make command to create the actor in database.
     {
         $validator = Validator::make($request->all(), [
             //Testing for the creation of the actors.
