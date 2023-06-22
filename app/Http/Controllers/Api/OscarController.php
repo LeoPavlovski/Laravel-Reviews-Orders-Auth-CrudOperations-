@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\OscarResource;
 use App\Models\Oscar;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 //  $table->id();
 //            $table->string('role');
@@ -30,6 +31,20 @@ class OscarController extends Controller
             return OscarResource::collection($oscars);
         }
     }
+    //"role"=>'leo',
+    //                'year'=>'2023',
+    //                'actor_id'=>1,
+
+    public function query(){
+        $query= Oscar::query();
+        $oscars = QueryBuilder::for($query)->allowedFilters('role','year','actor_id')
+            ->allowedSorts('role','year','actor_id')
+            ->allowedIncludes('actor')
+            ->get();
+
+        return OscarResource::collection($oscars);
+    }
+
 
     /**
      * Store a newly created resource in storage.
