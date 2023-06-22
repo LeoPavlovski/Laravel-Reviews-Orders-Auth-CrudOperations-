@@ -22,7 +22,8 @@ class MovieResource extends JsonResource
        return [
          'name'=>$this->name,
          'director_id'=>$this->director_id,
-         'salary'=>$this->salary
+         'salary'=>$this->salary,
+           'director' => new DirectorResource($this->whenLoaded('director'))
        ];
     }
 }

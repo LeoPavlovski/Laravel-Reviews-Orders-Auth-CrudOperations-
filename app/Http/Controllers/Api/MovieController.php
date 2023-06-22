@@ -7,6 +7,8 @@ use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use MongoDB\Driver\Query;
+use Spatie\QueryBuilder\QueryBuilder;
 
 //Movie Controller
 //$table->string('name');
@@ -31,6 +33,15 @@ class MovieController extends Controller
                 "message"=>'Movies are empty'
             ]);
         }
+        return MovieResource::collection($movies);
+    }
+    public function query(){
+        $query = Movie::query();
+        $movies = QueryBuilder::for($query)
+        ->allowedFilters('name','director_id','salary')
+        ->allowedSorts('name','director_id','salary')
+        ->allowedIncludes('director')->get();
+
         return MovieResource::collection($movies);
     }
 
