@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
@@ -16,6 +17,12 @@ class UserController extends Controller
     {
         $movies = User::all();
         return UserResource::collection($movies);
+    }
+    public function query(){
+        $query = User::query();
+        $users = QueryBuilder::for($query)->allowedFilters('name','email','role_id')
+        ->allowedSorts('name','email','role_id')->allowedIncludes('role')->get();
+        return UserResource::collection($users);
     }
 
     /**
