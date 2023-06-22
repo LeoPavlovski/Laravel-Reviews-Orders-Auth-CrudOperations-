@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\PremierController;
 use App\Http\Controllers\Api\PremierTypeController;
 use App\Http\Controllers\Api\TvSerieController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -193,4 +194,5 @@ Route::delete('/deleteRecommendation/{recommendation}',[RecommendationController
 
 Route::get('/getUsers',[UserController::class,'index']);
 
+//mail
 
