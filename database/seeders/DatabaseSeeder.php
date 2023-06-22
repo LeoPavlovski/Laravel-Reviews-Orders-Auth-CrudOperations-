@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             REPORTEDSEEDER::class,
             ReviewSeeder::class,
+            RecommendationTypeSeeder::class,
+            recommendationSeeder::class
         ]);
     }
 }
