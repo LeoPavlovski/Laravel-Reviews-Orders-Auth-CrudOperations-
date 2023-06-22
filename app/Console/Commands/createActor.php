@@ -57,7 +57,7 @@ class createActor extends Command
             'date_of_birth'=>$date_of_birth,
             'agent_id'=>$agentId
         ]);
-        if( !$actor){
+        if(!$actor){
             $this->info("Actor can't be added to the database");
         }
         $this->info("Actor is added to the database");

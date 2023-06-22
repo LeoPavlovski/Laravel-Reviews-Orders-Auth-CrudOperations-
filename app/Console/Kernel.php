@@ -4,7 +4,10 @@ namespace App\Console;
 
 use App\Console\Commands\addActorMovies;
 use App\Console\Commands\addDirector;
+use App\Console\Commands\addFilm;
 use App\Console\Commands\addOscars;
+use App\Console\Commands\addPremier;
+use App\Console\Commands\adminPromotes;
 use App\Console\Commands\createActor;
 use App\Console\Commands\createAgent;
 use App\Console\Commands\createuser;
@@ -37,6 +40,9 @@ class Kernel extends ConsoleKernel
         $this->commands[]=addActorMovies::class;
         $this->commands[]=addDirector::class;
         $this->commands[]=addOscars::class;
+        $this->commands[]=addFilm::class;
+        $this->commands[]=addPremier::class;
+        $this->commands[]=adminPromotes::class;
 
         require base_path('routes/console.php');
     }
