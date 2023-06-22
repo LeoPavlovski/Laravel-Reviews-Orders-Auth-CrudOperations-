@@ -58,7 +58,7 @@ class ActorController extends Controller
         $validator = Validator::make($request->all(), [
             //Testing for the creation of the actors.
                 'name' => 'required|max:20|string|unique:actors,name',
-                'nickname' => 'required|max:20|unique:actors,nickname',
+                'nickname' => 'max:20|unique:actors,nickname',
                 'date_of_birth' => 'required|date_format:Y-m-d',
                 'agent_id' => [
                 'required',

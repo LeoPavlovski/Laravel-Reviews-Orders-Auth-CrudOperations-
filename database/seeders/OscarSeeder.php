@@ -22,12 +22,32 @@ class OscarSeeder extends Seeder
     {
         DB::table('oscars')->insert([
             [
-                "role"=>'leo',
+                "role"=>'Actor',
                 'year'=>'2023',
                 'actor_id'=>1,
             ],
             [
-                "role"=>'Nikola',
+                "role"=>'Actor',
+                'year'=>'2023',
+                'actor_id'=>1,
+            ],
+            [
+                "role"=>'Actor',
+                'year'=>'2023',
+                'actor_id'=>1,
+            ],
+            [
+                "role"=>'Actor',
+                'year'=>'2023',
+                'actor_id'=>1,
+            ],
+            [
+                "role"=>'Actor',
+                'year'=>'2023',
+                'actor_id'=>1,
+            ],
+            [
+                "role"=>'Actor',
                 'year'=>'2023',
                 'actor_id'=>1,
             ],

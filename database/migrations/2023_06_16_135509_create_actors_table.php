@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('actors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nickname');
+            $table->string('nickname')->nullable();
             $table->date('date_of_birth');
             $table->unsignedBigInteger('agent_id');
             $table->foreign('agent_id')->references('id')->on('agents');

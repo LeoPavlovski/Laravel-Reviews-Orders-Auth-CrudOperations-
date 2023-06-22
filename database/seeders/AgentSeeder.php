@@ -32,6 +32,9 @@ class AgentSeeder extends Seeder
             [
                 "name"=>'Agent',
                 'code'=>'lasdkd',
+            ],
+            [      "name"=>'FLEECE',
+                'code'=>'lasdkd',
             ]
         ]);
     }

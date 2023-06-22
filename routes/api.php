@@ -191,5 +191,6 @@ Route::post('/createRecommendation',[RecommendationController::class, 'store']);
 Route::put('/updateRecommendation/{recommendation}',[RecommendationController::class,'update']);
 Route::delete('/deleteRecommendation/{recommendation}',[RecommendationController::class , 'destroy']);
 
+Route::get('/getUsers',[UserController::class,'index']);
 
 
