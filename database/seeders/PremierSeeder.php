@@ -22,7 +22,7 @@ class PremierSeeder extends Seeder
     {
         DB::table('premiers')->insert([
             [
-                "first_week"=>'Week1',
+                "first_week"=>'Week2',
                 'city'=>'Tetovo',
                 'formats'=>'someformat',
                 'premier_id'=>1
@@ -31,7 +31,7 @@ class PremierSeeder extends Seeder
                 "first_week"=>'Week1',
                 'city'=>'Tetovo',
                 'formats'=>'someformat',
-                'premier_id'=>1
+                'premier_id'=>2
             ],
         ]);
     }
