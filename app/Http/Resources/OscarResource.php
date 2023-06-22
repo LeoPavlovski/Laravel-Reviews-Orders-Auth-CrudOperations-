@@ -24,6 +24,7 @@ class OscarResource extends JsonResource
          'role'=>$this->role,
          'year'=>$this->year,
          'actor_id'=>$this->actor_id,
+           'actor'=>new ActorResource($this->whenLoaded('actor'))
        ];
     }
 }
