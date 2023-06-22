@@ -20,6 +20,18 @@ class ReviewResource extends JsonResource
     'movie_id'
      * @return array<string, mixed>
      */
+    // public function reported(){
+    //        return $this->belongsTo(User::class);
+    //    }
+    //    public function reported_status(){
+    //        return $this->belongsTo(REPORTED::class);
+    //    }
+    //    public function user(){
+    //        return $this->belongsTo(User::class);
+    //    }
+    //    public function movie(){
+    //        return $this->belongsTo(Movie::class);
+    //    }
     public function toArray(Request $request): array
     {
        return [
@@ -31,7 +43,10 @@ class ReviewResource extends JsonResource
            'reported_status'=>$this->reported_status,
            'reported_by'=>$this->reported_by,
            'user_id'=>$this->user_id,
-           'movie_id'=>$this->movie_id
+           'movie_id'=>$this->movie_id,
+           'reported'=> new ReportResource($this->whenLoaded('reported')),
+           'user'=>new UserResource($this->whenLoaded('user')),
+           'movie'=>new MovieResource($this->whenLoaded('movie'))
        ];
     }
 }
