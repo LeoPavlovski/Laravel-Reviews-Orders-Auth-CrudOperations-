@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ActorMovieController;
 use App\Http\Controllers\Api\AdminPromotesController;
 use App\Http\Controllers\Api\FleeceController;
 use App\Http\Controllers\Api\ModeratorController;
+use App\Http\Controllers\Api\RecommendationController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\RoleController;
@@ -142,13 +143,32 @@ Route::post('/auth/login', [AuthenticationController::class ,'login']);
 
 //Queries
 
+//Director
 Route::get('Director/Query', [DirectorController::class ,'queries']);
+//Actor
 Route::get('Actor/Query',[ActorController::class,'query']);
+//ActorMovie
 Route::get('/ActorMovie/Query',[ActorMovieController::class,'query']);
+//Agent
 Route::get('/Agent/Query',[AgentController::class,'query']);
+//Film
 Route::get('/Film/Query',[FilmsController::class,'query']);
-
+//Movie
+Route::get('/Movie/Query',[MovieController::class,'query']);
+//Oscar
+Route::get('/Oscar/Query',[OscarController::class,'query']);
+//Premier
+Route::get('/Premier/Query',[PremierController::class,'query']);
+//Report
+Route::get('/Report/Query',[ReportController::class,'query']);
+//Review
+Route::get('/Review/Query',[ReviewController::class,'query']);
 //Reported
+Route::get('/Role/Query',[RoleController::class,'query']);
+//Tv
+Route::get('/Tv/Query',[TvSerieController::class,'query']);
+//Role
+Route::get('/User/Query',[UserController::class , 'query']);
 
 Route::get('/getReports',[ReportController::class,'index']);
 Route::get('/getReport/{report}',[ReportController::class,'show']);
@@ -163,6 +183,13 @@ Route::get('/getReview/{review}',[ReviewController::class,'show']);
 Route::post('/createReview',[ReviewController::class,'store']);
 Route::put('/updateReview/{review}',[ReviewController::class,'update']);
 Route::delete('/deleteReview/{review}',[ReviewController::class,'destroy']);
+
+//Recommendations
+Route::get('/getRecommendations',[RecommendationController::class , 'index']);
+Route::get('/getRecommendation/{recommendation}',[RecommendationController::class, 'show']);
+Route::post('/createRecommendation',[RecommendationController::class, 'store']);
+Route::put('/updateRecommendation/{recommendation}',[RecommendationController::class,'update']);
+Route::delete('/deleteRecommendation/{recommendation}',[RecommendationController::class , 'destroy']);
 
 
 
