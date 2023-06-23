@@ -20,7 +20,14 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make('1234'),
                 'email'=>"leo.te2011@hotmail.com",
                 'role_id'=>1
+            ],
+            [
+                'name'=>"ksdkad",
+                'password'=>Hash::make('1234'),
+                'email'=>"nikola@hotmail.com",
+                'role_id'=>1
             ]
+
         ]);
     }
 }

@@ -196,3 +196,4 @@ Route::get('/getUsers',[UserController::class,'index']);
 
 //mail
 
+Route::get('/sendActor/{actorId}',[MailController::class, 'sendMail']);

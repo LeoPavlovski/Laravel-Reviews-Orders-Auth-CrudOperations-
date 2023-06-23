@@ -16,16 +16,23 @@ class SignUp extends Mailable
 
     /**
      * Create a new message instance.
+     * $table->string('name');
+    $table->string('nickname')->nullable();
+    $table->date('date_of_birth');
+    $table->unsignedBigInteger('agent_id');
+    $table->foreign('agent_id')->references('id')->on('agents');
      */
-    public function __construct()
+    public $name;
+    public $date;
+    public $agent_id;
+    public $nickname;
+    public function __construct($name,$date,$agent_id, $nickname)
     {
-        //Assign the values here.
-//        $this->user_name=$user_name;
-//        $this->user_surname=$user_surname;
-//        $this->book=$book;
-//        $this->author=$author;
+        $this->name =$name;
+        $this->date = $date;
+        $this->agent_id = $agent_id;
+        $this->nickname = $nickname;
     }
-
     /**
      * Get the message envelope.
      */

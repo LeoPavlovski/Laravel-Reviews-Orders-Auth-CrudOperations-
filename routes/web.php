@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\MailController;
+use App\Models\User;
+use App\Notifications\InvoiceCreated;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/',[MailController::class, 'sendMail']);
+
+    Route::get("/notifications", function (Request $request) {
+    $user = User::find(1);
+    $user->notify(new InvoiceCreated);
+});
